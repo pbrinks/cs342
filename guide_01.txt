@@ -30,8 +30,10 @@ a. 	Compare and contrast data, databases, database (management) systems
 b.	Compare and contrast database systems with the following,using 
 	the main characteristics of the database approach in your discussion.
 	-	data structures and algorithms
-		■ Users can define operations as part of the definition for both.
-	
+		■ Users can define operations as part of the definition for both, but 
+		databases have self-describing data (schemata), and a separation of data
+		from programs. Databases have multiple views which allows different
+		users to view different data.
 	-	traditional file systems
 		■ In traditional file processing each user defines and implements 
 		the files needed for a specific software application as part of
