@@ -10,6 +10,7 @@ Chapter 1
 
 a. 	Compare and contrast data, databases, database (management) systems 
 	and information systems.
+	- Data are known facts that can be recorded and that have implicit meaning.
 	- A database is a collection of related data. A database has some source
 	from which data is derived, some degree of interaction with events in 
 	the real world, and an audience that is actively interested in its 
