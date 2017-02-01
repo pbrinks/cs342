@@ -1,3 +1,8 @@
+Paige Brinks
+CS 342
+Guide 01
+02/01/2017
+
 Work through the following materials, recording answers to the 
 questions so that you can bring them to class and submit them for review.
 
@@ -91,10 +96,4 @@ c.	Explain the tiers used in a typical web-based information system.
 	database security by checking a client’s credentials before forwarding a request to
 	the database server.
 
-
-3. 	If you’ve never used Git or GitHub, create an account for yourself and 
-	review the relevant materials referenced in the CS 262 guide (see 
-	“Project Management Tools - GitHub”). Please create a cs342 repo in 
-	your account and add your GitHub ID to this Google Sheet. We’ll pull 
-	your assignment submissions from https://github.com/yourLoginId/cs342.
 
