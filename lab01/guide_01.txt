@@ -1,0 +1,102 @@
+Paige Brinks
+CS 342
+Guide 01
+02/01/2017
+
+Work through the following materials, recording answers to the 
+questions so that you can bring them to class and submit them for review.
+
+Chapter 1
+
+a. 	Compare and contrast data, databases, database (management) systems 
+	and information systems.
+	- Data are known facts that can be recorded and that have implicit meaning.
+	- A database is a collection of related data. A database has some source
+	from which data is derived, some degree of interaction with events in 
+	the real world, and an audience that is actively interested in its 
+	contents. Actions can be made which alter the data, and the database 
+	must be updated immediately, in order to keep it accurate.
+	- A DBMS is a computerized system that enables users to create and
+	maintain a database. A DBMS is a general purpose software system that 
+	facilitates the process of defining, constructing, manipulating, and 
+	sharing databases among various users and applications.
+	- The database and DBMS together are a database system.
+	- Information systems are computer systems that support end users, 
+	giving them access to the information. For a large number of 
+	information systems, the data is held in databases and access 
+	is via database management systems. 
+	
+	
+b.	Compare and contrast database systems with the following,using 
+	the main characteristics of the database approach in your discussion.
+	-	data structures and algorithms
+		■ Users can define operations as part of the definition for both, but 
+		databases have self-describing data (schemata), and a separation of data
+		from programs. Databases have multiple views which allows different
+		users to view different data.
+	-	traditional file systems
+		■ In traditional file processing each user defines and implements 
+		the files needed for a specific software application as part of
+		programming the application. This creates a lot of redundancy in the
+		files because multiple files may require some data another file already
+		contains, in addition to the new data they are storing. This wastes
+		storage space. 
+		■ In a database a single repository maintains data that is defined once
+		and then accessed by various users repeatedly through queries, transactions,
+		and application programs. The main characteristics of the database approach versus the
+		file-processing approach are the following:
+			- Self-describing nature of a database system
+			- Insulation between programs and data, and data abstraction
+			- Support of multiple views of the data
+			- Sharing of data and multiuser transaction processing
+		
+	-	Identify the stakeholders of database systems.
+		■ Database administrators, database designers, causal end users, 
+		naive or parametic end users, sophisticated end users, standalone users,
+		system analysts, application programmers. 
+
+Chapter 2
+
+a.	Explain the significance of the categories of data models. Which type 
+	of model is displayed in Figure 2.1?
+	- Data models provide the necessary means to achieve the correct level
+	of data abstraction for a user. Data models are a collection of concepts
+	that can be used to describe teh structure of a databse, most also contain
+	a set of basic operations for specifying retrievals and updates on the 
+	database. 
+	- Figure 2.1 is a schema diagram.
+
+b.	Explain the structure and significance of the three-schema architecture.
+	1. The internal level has an internal schema, which describes the physical
+	storage structure of the database. The internal schema uses a physical data
+	model and describes the complete details of data storage and access paths for
+	the database.
+	2. The conceptual level has a conceptual schema, which describes the structure
+	of the whole database for a community of users. The conceptual schema hides
+	the details of physical storage structures and concentrates on describing entities,
+	data types, relationships, user operations, and constraints. Usually, a representational
+	data model is used to describe the conceptual schema when a
+	database system is implemented. This implementation conceptual schema is
+	often based on a conceptual schema design in a high-level data model.
+	3. The external or view level includes a number of external schemas or user
+	views. Each external schema describes the part of the database that a particular
+	user group is interested in and hides the rest of the database from that
+	user group. As in the previous level, each external schema is typically implemented
+	using a representational data model, possibly based on an external
+	schema design in a high-level conceptual data model.
+	- The three-schema architecture is a convenient tool with which the user can visualize
+	the schema levels in a database system.
+
+c.	Explain the tiers used in a typical web-based information system.
+	- In a two-tier architecture the software is distrubeted over two systems: he client
+	and the server. Advantages of this are simplicity and seamless compatibility
+	with existing systems. 
+	- Many Web appls use the three-tier architecture, which adds an intermediate layer
+	layer between the client and the database server, called the application or Web 
+	server. This server plays an intermediary role by running application 
+	programs and storing business rules (procedures or constraints)
+	that are used to access data from the database server. It can also improve
+	database security by checking a client’s credentials before forwarding a request to
+	the database server.
+
+
