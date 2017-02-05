@@ -1,0 +1,38 @@
+Paige Brinks
+CS 342
+Guide 02
+02/06/2017
+
+1. Chapter 5 (focus primarily on Sections 5.1–5.2)
+
+	a. 	Who invented the relational data model? When and where did they do their work?
+		The relational data model was first introdiced by Ted Codd of IBM Research in 1970.
+
+	b.	Explain the following terms:
+		i.	relation
+			A set of tuples.
+		ii.	attribute
+			The name of a role played by some domain in a relation schema. Portrayed as a comlumn header in the table
+		iii. domain
+			A set of of atomic (indivisible) values. 
+		iv.	n-tuple
+			An ordered list of n related data values, where each value is an element of the domain of that attribute. Each tuple corresponds to a row in the table.
+		v.	NULL value
+			Represent attributes whose values are unknown or do not exist for some individual tuple.
+		vi.	primary, foreign, candidate and super keys
+			Primary key - attribute or combination of attributes that uniquely identifies a row or record in a relation.
+			Foreign key - attribute or combination of attributes whose value match a foreign primary key in another relation.
+			Candidate key - The fields or combination of fields that are not used as the primary key.
+			Super key - combination of attributes that can be uniquely used to identify a databse record. 
+		vii.	referenced and referencing records
+			If record R1 has attributes with the same domain as record R2's primary key attributes, then R1 is the referencing relation adn R2 is the referenced relation.
+	c.	Are tuples in a relation ordered? How about attribute values in a tuple? Explain why or why not.
+		Tuples in a relation are not ordered. This is because a relation attempts to represent facts at a logical or abstract level. An n-tuple is an ordered list of n values. However, at a more abstract level, the order of attributes and their values is not that important as long as the correspondence between attributes and values is maintained. 
+
+	d.	Can attributes have multiple values in a single n-tuple? Why or why not?
+		No, each value in a tuple is atomic.
+
+2.	Chapter 6 (focus primarily on Sections 6.1–6.2 & 6.4) — Make sure that you know how to:
+	a.	Create tables with specified constraints, including primary/foreign key, not-null, domain and value-check constraints.
+	b.	Use the DML commands: INSERT, DELETE and UPDATE.
+	c.	Distinguish the ON DELETE actions: SET NULL; CASCADE.
