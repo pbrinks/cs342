@@ -1,0 +1,18 @@
+Paige Brinks
+CS 342
+Homework01_1
+02/09/2017
+
+a. If the name of the ‘CS’ (Computer Science) Department changes to ‘CSSE’
+(Computer Science and Software Engineering) Department and the corresponding prefix for the course number also changes, identify the columns in the database that would need to be updated.
+	The columns that would need to change are:
+	- Major column in STUDENT table
+	- Course_number in COURSE 
+	- Department in COURSE 
+	- Course_number in SECTION
+	- Course_number in PREREQUISITE
+	- Prerequisite_number in PREREQUISITE
+
+b. Can you restructure the columns in the COURSE, SECTION, and PREREQUISITE tables so that only one column will need to be updated?
+	These tables can be restructured to a have a seperate field for course_department and course_number. The COURSE table already does this, so the Department column would need to be updated to say CSSE instead of CS and the Course_number column would then only contain the number of the class. For example, the first record would only contain 1310. The SECTION table would need an extra column added to match that format. The PREREQUISITE table however. would need a Course_department column added and a Prerequisite_department column added, which would then still require two columns to be updated in order to fix this change. This is necessary because the prerequisite for a class is not always in the same department. For example, CS3380 has a prerequisite of MATH2410.
+	
