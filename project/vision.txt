@@ -1,0 +1,7 @@
+Paige Brinks
+CS 342
+Project Vision
+02/10/2017
+
+For my project I would like to make a vacation or trip database. It would contain the following tables: Continent, Country, City, Attraction, Hotel, Restaurant, PublicTransport, and Trip. The stakeholders for my project would be someone planning a vacation, travel agencies, someone who wants to find more fun things to do in their own city, and any businesses contained in my databse (attractions, hotels, public transport, etc.). 
+
