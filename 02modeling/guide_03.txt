@@ -1,4 +1,10 @@
-﻿1.	Read Chapter 3.
+﻿Paige Brinks
+CS 342
+Guide 02
+02/13/2017
+
+
+1.	Read Chapter 3.
 a.	Compare and contrast the database and the software design processes. Are agile modeling practices applicable to database design as well?
 	-	Agile modeling practices are not applicable to databse design. In agile developers start with the building the bare necessities and build up from there, when designing a database, it is important to look ahead and try to get everything necessary included at the beginning. It is much harder to go back and add things.
 
@@ -14,16 +20,16 @@ b.	Explain the following terms: entities, relationships (including cardinality a
 		-	Derived: An attribute that can be determined from a different attribute. Example: Age can be derived from birth-date
 
 c.	Explain weak entities and identifying relationships.
-	-	Entity types that do not have key attributes of ther own. They are identified by being related to specific entities from another entity type in combination with one of their attribute values. This other entity type is called the identfying type and the relationship type that relates a weak entity type to its owner is the identifying relationship.
+	-	Weak entities are entity types that do not have key attributes of ther own. They are identified by being related to specific entities from another entity type in combination with one of their attribute values. This other entity type is called the identfying type and the relationship type that relates a weak entity type to its owner is the identifying relationship.
 
 d.	Model a person-household database (from class 2) using an ERD.
-	-	See Person-Household ERD.png
+	-	See Person-Household.png
 e.	Skim the material in Section 3.8 on UML diagrams; we won’t use it here but we have addressed it in CS 262 and will review it in unit 11.
 
 Note the ERD reference sheet in Figure 3.14.
 
 2.	Read Chapter 9.
-
 a.	Map the ERD model from above to a relational database model.
-
+	-	See Person-Household.png
 b.	Explain how to map from a UML model to a relational database model. We will address this issue more carefully in a later unit (on object-relational mapping).
+	-	Every table in the relational model becomes a box with all of the fields listed inside of it. Any foreign key relationship is shown by drawing a line from the box containing the foreign key, to the box of the table that the key references. The cardinality of the relationship is shown next to the line.
