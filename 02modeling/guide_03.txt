@@ -1,0 +1,29 @@
+﻿1.	Read Chapter 3.
+a.	Compare and contrast the database and the software design processes. Are agile modeling practices applicable to database design as well?
+	-	Agile modeling practices are not applicable to databse design. In agile developers start with the building the bare necessities and build up from there, when designing a database, it is important to look ahead and try to get everything necessary included at the beginning. It is much harder to go back and add things.
+
+b.	Explain the following terms: entities, relationships (including cardinality and participation constraints), attributes (simple, composite, multi-valued and derived).
+	-	Entities: A thing or object in the real world with an indepedent existence.
+	-	Relationship: Situation that exists between two relational database tables when one table has a foreign key that references the  primary key of the other table.
+		-	Cardinality: The cardinality ratio specifies the maximum number of relationship instances that an entity can participate in.
+		-	Participation constraints: Specifies whether the existence of an entity depends on its being related to another entity via the relationship type. This constraint specifies the minimum number of relationship instances that each entity can participate in. There are two types of constraints: total and partial.
+	-	Attributes: The particular properties that describe an entity. Each entity has attributes. 
+		-	Simple: Attributes that cannot be divided into smaller subparts.
+		- 	Composite: Attributes that can be divided into smaller subparts, which represent more basic attributes with independent meanings. Ex: Address
+		-	Multi-valued: Attributes which can have different numbers of values. Ex: College degree(s)
+		-	Derived: An attribute that can be determined from a different attribute. Example: Age can be derived from birth-date
+
+c.	Explain weak entities and identifying relationships.
+	-	Entity types that do not have key attributes of ther own. They are identified by being related to specific entities from another entity type in combination with one of their attribute values. This other entity type is called the identfying type and the relationship type that relates a weak entity type to its owner is the identifying relationship.
+
+d.	Model a person-household database (from class 2) using an ERD.
+	-	See Person-Household ERD.png
+e.	Skim the material in Section 3.8 on UML diagrams; we won’t use it here but we have addressed it in CS 262 and will review it in unit 11.
+
+Note the ERD reference sheet in Figure 3.14.
+
+2.	Read Chapter 9.
+
+a.	Map the ERD model from above to a relational database model.
+
+b.	Explain how to map from a UML model to a relational database model. We will address this issue more carefully in a later unit (on object-relational mapping).
