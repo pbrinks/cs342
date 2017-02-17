@@ -128,9 +128,14 @@ INSERT INTO Shipment VALUES (3, 1, '07-DEC-2016');
 INSERT INTO Shipment VALUES (4, 3, '17-DEC-2016');
 INSERT INTO Shipment VALUES (5, 3, '14-JAN-2017');
 
+--2. Exercise 5.20
+-- I would say surrogate keys are acceptable (and should be used), because it is almost 
+-- impossible to come up with a natural key that would be unique for each student. You should
+-- not assume for example that every student would have a unique full name or their name and 
+-- combined with their birthdate, etc. would be unique. However, with a surrogate key you are
+-- gaurenteed that your key will always be unique.
 
 -- 3. Queries
-
 --a.
 SELECT Customer_Order.ord_date, Customer_Order.ord_amt FROM Customer_Order, Customer
 WHERE Customer.firstName = 'Lydia'
