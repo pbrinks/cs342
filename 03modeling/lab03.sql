@@ -3,6 +3,10 @@
 -- CS 342, 
 -- 02/17/2017
 -- Paige Brinks
+--
+-- See cpdb-partial.pdf for ERD
+
+
 drop table PersonTeam;
 drop table PersonHousehold;
 drop table Team;
@@ -10,7 +14,7 @@ drop table Person;
 drop table HouseHold;
 drop table Homegroup;
 
-
+-- create tables
 create table HouseHold(
 	ID integer PRIMARY KEY,
 	street varchar(30),
