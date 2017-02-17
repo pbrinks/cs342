@@ -23,10 +23,15 @@ CREATE TABLE Movie (
 	CHECK (score IS NULL OR vote_count > 1000)
 );
 
-INSERT INTO Movie VALUES (1,'Star Wars',1977,NULL,500); -- success
-INSERT INTO Movie VALUES (1,'Star Wars',1977,8.9, 500);	-- error
-INSERT INTO Movie VALUES (2,'Blade Runner',1982,8.6, 1001);	-- success
-INSERT INTO Movie VALUES (1,'Star Wars',1977,NULL,2045);	-- error
+
+-- success
+INSERT INTO Movie VALUES (1,'Star Wars',1977,NULL,500); 
+-- error
+-- INSERT INTO Movie VALUES (1,'Star Wars',1977,8.9, 500);	
+-- success
+INSERT INTO Movie VALUES (2,'Blade Runner',1982,8.6, 1001);	
+-- error
+-- INSERT INTO Movie VALUES (1,'Star Wars',1977,NULL,2045);	
 
 
 -- the constraint is:
@@ -43,7 +48,8 @@ CREATE TABLE Performer (
 	
 CREATE TABLE StatusType (
 	id integer,
-	name varchar(20)
+	name varchar(20),
+	PRIMARY KEY (id)
 	);
 	
 CREATE TABLE Casting (
@@ -52,18 +58,18 @@ CREATE TABLE Casting (
 	status integer,
 	FOREIGN KEY (movieId) REFERENCES Movie(Id) ON DELETE CASCADE,
 	FOREIGN KEY (performerId) REFERENCES Performer(Id) ON DELETE SET NULL,
-	FOREIGN KEY (status) REFERENCES StatusType(id) ON DELETE SET NULL
+	FOREIGN KEY (status) REFERENCES StatusType(Id) ON DELETE SET NULL
 	);
 
-
-INSERT INTO StatusType(1, 'star');
-INSERT INTO StatusType(2, 'costar');
-INSERT INTO StatusType(3, 'extra');
 
 INSERT INTO Performer VALUES (1,'Harrison Ford');
 INSERT INTO Performer VALUES (2,'Rutger Hauer');
 INSERT INTO Performer VALUES (3,'The Mighty Chewbacca');
 INSERT INTO Performer VALUES (4,'Rachael');
+
+INSERT INTO StatusType VALUES (1, 'star');
+INSERT INTO StatusType VALUES (2, 'costar');
+INSERT INTO StatusType VALUES (3, 'extra');
 
 INSERT INTO Casting VALUES (1,1,1);
 INSERT INTO Casting VALUES (1,3,3);
