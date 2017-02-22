@@ -20,7 +20,7 @@ Guide 04
 	b.	Explain the terms functional dependency (for Monday, see Section 14.2) and multi-valued dependency (for Wednesday, see Section 14.6) by giving an example of each and showing how it satisfies the term’s formal definition.
 		- Functional dependency: A constraint between two sets of attributes from the database. - A functional dependency between two sets of attributes X and Y, denoted X -> Y, that are subsets of R specifies a constraint on the possible tuples that can form a relation state r of R. The constraint is that, for any two tuples t1 and t2 in r have t1[X]=t2[X], they must also have t1[Y]=t2[Y].
 			- ex: {State, Driver_license_number} -> Ssn
-		- Multi-valued dependency:
+		- Multi-valued dependency: Multivalued dependencies occur when there are more than one independent multivalued attributes in a table.
 
 	c.	Review the formal definitions of these terms: superkey; key (see Section 14.3.3).
 		- A superkey of a relation schema R is a set S of attributes with the property that no two tuples t1 and t2 in any legal relation state r of R will have t1[S]=t2[S]
@@ -31,7 +31,7 @@ Guide 04
 		- Boyce-Codd Normal Form (BCNF): A relation schema R is in BCNF if whenever a nontrivial functional dependency X -> A holds in R, then X is a superkey of R.
 			- Differs from 3NF because the clause in 3NF because does not allows functional dependencies to have the RHS as a prime attribute. IS therefore a stronger normal form than 3NF. 1NF and 2NF are seen as intermediate stepping stones to achieve 3NF or BCNF.
 		
-		- 4NF:
+		- 4NF: fourth normal form requires that either every multivalued dependency X  multidetermines Y is trivial or for every nontrivial multivalued dependency X  multidetermines Y, X is a superkey. A multivalued dependency X multidetermines Y is trivial if Y is a subset of X, or if X union Y is the whole set of attributes of the relation.
 
 	e.	Explain when one would one want to normalize a relational schema and when one might want to de-normalize one.
 		- In a normalized relational schema updates and inserts are very fast becuase the data is located at a single place - there are no duplicates, however, this can make selects slow, because the user is more likely to need to join tables together. Therefore, normalized databases are good for when applications require more writing than reading.
