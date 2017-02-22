@@ -4,4 +4,8 @@ Homework 03_1
 02/22/2017
 
 1. 
-Flights have rimary key of number, and also airline and weekdays fields. Legs is a weak identifying relationship between flight and flight legs. Each flight leg has one flight and each flight has many flight legs. each flight leg has leg_no field (why is this underlined with a dotted line?) 
+a.	Flights would be an entire path. For example If I wanted to fly to Sydney, Australia. The entire path I take is the flight. Flights are made up of flight legs which would be the individual trips taken to get to Sydney. If I transfer in Chicago and then Portland, the first flight leg would be the plane ride from Grand Rapids to Chicago. The next flight leg would be the plane ride from Chicago to Portland, etc. Each airline has designated airports they fly between, which make the flight legs. A leg instance is a specific instance of that leg being flown, because flight legs can be flown many times. To sum up: a flight leg is a nonstop portion of a flight, and a leg instance is a particular occurrence of a leg on a particular date.
+
+b.	The dotted line shows that that field is a part of the primary key, however, since it is a weak entity it is not the whole primary key, the other fields that make up the primary key are borrowed from other entities. 
+
+c.	Each leg instance can have many reservations, because many people will be flying that leg instance together, and each reservation can have many seats in the reservation. For example if a family is flying together, one family member would make a reservation for five seats. However, each individual seat can only be reserved once. 
