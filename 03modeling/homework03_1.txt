@@ -1,0 +1,7 @@
+Paige Brinks
+cs 342
+Homework 03_1
+02/22/2017
+
+1. 
+Flights have rimary key of number, and also airline and weekdays fields. Legs is a weak identifying relationship between flight and flight legs. Each flight leg has one flight and each flight has many flight legs. each flight leg has leg_no field (why is this underlined with a dotted line?) 
