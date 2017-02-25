@@ -13,7 +13,9 @@
 -- lab04 part 1
 --
 -- 02/24/17
-
+drop table PersonTeam;
+drop table Team;
+drop table Person;
 drop table AltPerson;
 
 CREATE TABLE AltPerson (
@@ -49,3 +51,57 @@ INSERT INTO AltPerson VALUES (3, 'Jeff', 'm', NULL, NULL, NULL, 'deacons', 'chai
 -- Person(personID, name, status, mentorID) -- personID is the primary key, mentorID is a foreign key referring back to Person
 -- Team(teamID, teamName, teamTime)
 -- PersonTeam(personID, teamID, teamRole)
+
+
+-- c. [homework]
+-- create normalized sub-relations
+CREATE TABLE Person (
+	personId integer PRIMARY KEY,
+	name varchar(10),
+	status char(1),
+	mentorId integer,
+	FOREIGN KEY (mentorId) REFERENCES Person(personId) ON DELETE SET NULL
+);
+
+CREATE TABLE Team (
+	teamName varchar(10) PRIMARY KEY,
+    teamTime varchar(10)
+);
+
+CREATE TABLE PersonTeam (
+	personId integer,
+	teamName varchar(10),
+	teamRole varchar(10),
+	PRIMARY KEY (personId, teamName),
+	FOREIGN KEY (personId) REFERENCES Person(personId) ON DELETE CASCADE,
+	FOREIGN KEY (teamName) REFERENCES Team(teamName) ON DELETE CASCADE
+);
+
+
+-- populate sub-relations using data from AltPerson database
+INSERT INTO Person (personId, name, status, mentorId)
+	SELECT 
+		distinct AltPerson.personId,
+		AltPerson.name, 
+		AltPerson.status,
+		AltPerson.mentorId
+	FROM AltPerson;
+	
+INSERT INTO Team (teamName, teamTime)
+	SELECT 
+		distinct AltPerson.teamName,
+		AltPerson.teamTime
+	FROM AltPerson;
+	
+INSERT INTO PersonTeam (personId, teamName, teamRole)
+	SELECT 
+		distinct AltPerson.personId,
+		AltPerson.teamName,
+		AltPerson.teamRole
+	FROM AltPerson;
+		
+		
+-- display data in new sub-relations
+select * from Person;
+select * from Team;
+select * from PersonTeam;

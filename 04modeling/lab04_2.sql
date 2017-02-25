@@ -12,6 +12,7 @@
 --
 -- 02/24/17
 
+DROP TABLE PersonTeamVisit;
 DROP TABLE PersonTeam;
 DROP TABLE PersonVisit;
 
@@ -55,3 +56,23 @@ WHERE pt.personName = pv.personName;
 -- Shamkkant, elders, '1-MAR-2015'
 -- Shamkkant, executive, '1-MAR-2015'
 -- This repeats a lot of information.
+
+
+-- d. [Homework]
+-- Create a new table to store the data queried by the combined “view” query at the end of the command file and load it with the queried data.
+
+CREATE TABLE PersonTeamVisit (
+	personName varchar(10),
+    teamName varchar(10),
+	personVisit date,
+	PRIMARY KEY (personName, teamName, personVisit)
+);
+
+INSERT INTO PersonTeamVisit (personName, teamName, personVisit)
+	SELECT pt.personName, pt.teamName, pv.personVisit
+	FROM PersonTeam pt, PersonVisit pv
+	WHERE pt.personName = pv.personName;
+
+
+select * from PersonTeamVisit;
+	
