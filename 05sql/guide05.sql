@@ -2,6 +2,10 @@
 --
 -- CS 342, Spring, 2017
 -- kvlinden
+--
+-- Paige Brinks
+-- guide05
+-- 2/26/2017
 
 -- Drop current database
 DROP TABLE Casting;
@@ -55,14 +59,12 @@ INSERT INTO Casting VALUES (2,4,'costar');
 -- guide 5
 -- 1.
 -- a. tuple variable 
-select * from Casting AS c
-where c.status = 'costar';
+select firstName || ' ' || lastName AS name from Performer;
 
 -- b. set operation
-(select lastName from Performer)
-EXCEPT
-(select * from Performer
-where lastName IS NULL);
+select id from Performer
+UNION
+	select performerId from Casting;
 
 -- 2.
 -- a. select based on NULL field value
@@ -71,11 +73,12 @@ where lastName IS NULL;
 
 -- b. nested subquery
 select lastName, firstName from Performer
-where id IN (select distinct performerId
-	from Casting);
+where id IN 
+	(select distinct performerId from Casting);
 	
 -- c. correlated subquery
-select movieId from Casting c1
-where (select movieId from Casting c2
-	where c1.performerId = c2.performerId
-		and c1.status <> c2.status);
+select movieId,
+	(select id
+	from Performer p
+	where c.performerId = p.id ) AS performerId
+from Casting c;
