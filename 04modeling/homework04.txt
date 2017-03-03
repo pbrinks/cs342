@@ -1,0 +1,42 @@
+-- Paige Brinks
+-- cs 342
+-- Homework 04
+--
+-- 03/02/2017
+
+
+1.	Do exercise 14.31.
+Consider the following relation for published books:
+
+BOOK (Book_title, Author_name, Book_type, List_price, Author_affil, Publisher)
+
+Book_title → Publisher, Book_type
+Book_type → List_price
+Author_name → Author_affil
+
+a.	This relation is in 1NF because none of the fields allow for a list. This relation is not in BCNF because a candidate key is Book_title, Book_type, and Author_name, however, none of the functional dependencies have these three fields together on the left hand side. Since this relation is not in BCNF it is therefore not in 4NF.
+
+b.	
+Book(ID, title, publisher, typeID, authorID)
+Type(ID, name, list_price)
+Author(ID, name, affil)
+
+The new functional dependencies are:
+in Book:
+ID -> title, publisher, typeID, authorID
+in Type:
+ID -> name, list_price
+in Author:
+ID -> name, affil
+
+This is now in BCNF because all of the left hand sides are candidate keys and there are no fields in the tables that are not dependent on their candidate keys. I added the IDs to each table because Book_title, Author_name, and Book_type are not necessarily unique by themselves. These tables do not have any Multivalied dependencies and are therefore in 4NF.
+
+
+2.	Do exercise 14.35. 
+Consider the relation:
+
+BOOK (Book_Name, Author, Edition, Year)
+
+a.
+
+
