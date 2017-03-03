@@ -20,4 +20,4 @@ CONNECT sadb/bjarne;
 
 -- (Re)Create the database.
 DEFINE sadb=S:\cs342\project
-@&sadb\load
+@load

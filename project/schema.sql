@@ -4,6 +4,14 @@ create table Department (
 	fullName varchar(50)
 	);
 
+create table Professor (
+	id integer PRIMARY KEY,
+	firstName varchar(20),
+	lastName varchar(20),
+	dept varchar(4),
+	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL
+	);
+	
 create table Program (
 	id integer PRIMARY KEY,
 	dept varchar(4),
@@ -13,22 +21,14 @@ create table Program (
 	country varchar(50),
 	city varchar(50),
 	cost float,
-	description varchar(100),
+	description varchar(200),
 	capacity integer,
 	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL,
 	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL
 	);
-
-create table Professor (
-	id integer PRIMARY KEY,
-	firstName varchar(20),
-	lastName varchar(20),
-	dept varchar(4),
-	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL
-	);
 	
 create table Participant (
-	id integer,
+	id integer PRIMARY KEY,
 	firstName varchar(20),
 	lastName varchar(20),
 	birthDate date,
@@ -57,7 +57,7 @@ create table Trip (
 	location varchar(50),
 	timeLength varchar(50),
 	totalCost float,
-	description varchar(100),
+	description varchar(100)
 	);
 	
 create table Attraction (

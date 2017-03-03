@@ -6,6 +6,6 @@ DROP TABLE Trip;
 DROP TABLE Review;
 DROP TABLE ProgramParticipant;
 DROP TABLE Participant;
-DROP TABLE Professor;
 DROP TABLE Program;
+DROP TABLE Professor;
 DROP TABLE Department;

@@ -2,13 +2,13 @@
 -- See ../README.md for details.
 
 -- Drop the previous table declarations.
-@&sadb\drop         
+@drop         
 commit;
 -- Reload the table declarations.
-@&sadb\schema
+@schema
 commit;
 -- Load the table data.
-@&sadb\data
+@data
 commit;
 -- Add constraints that cannot be added before the data.
 -- @&sadb\constraints
