@@ -19,11 +19,12 @@ where exists (select * from Person p2
 -- correlated
 	
 -- c.
-select * from Person 
-where homeGroupID <> 0 
+select p1.firstName || ' ' || p1.lastName from Person p1
+where p1.homegroupID <> (select id from Homegroup
+	where name = 'Byl')
 INTERSECT
-select * from Person p
+select p2.firstName || ' ' || p2.lastName from Person p2
 where exists (select * from PersonTeam pt
-	where p.id = pt.personID 
+	where p2.id = pt.personID 
 	and pt.teamName = 'Music');
 -- correlated
