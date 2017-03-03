@@ -1,8 +1,7 @@
--- Paige Brinks
--- cs 342
--- Homework 04
---
--- 03/02/2017
+Paige Brinks
+cs 342
+Homework 04
+03/02/2017
 
 
 1.	Do exercise 14.31.
@@ -17,9 +16,12 @@ Author_name → Author_affil
 a.	This relation is in 1NF because none of the fields allow for a list. This relation is not in BCNF because a candidate key is Book_title, Book_type, and Author_name, however, none of the functional dependencies have these three fields together on the left hand side. Since this relation is not in BCNF it is therefore not in 4NF.
 
 b.	
-Book(ID, title, publisher, typeID, authorID)
-Type(ID, name, list_price)
-Author(ID, name, affil)
+* denotes primary key
+** denotes foreign key
+
+Book(ID*, title, publisher, typeID**, authorID**)
+Type(ID*, name, list_price)
+Author(ID*, name, affil)
 
 The new functional dependencies are:
 in Book:
@@ -38,5 +40,28 @@ Consider the relation:
 BOOK (Book_Name, Author, Edition, Year)
 
 a.
+Bookname and author are not unique enough to be a candidate key - need another field with them.
+Possible candidate keys would be:
+Book_Name, Author, Edition
+Book_Name, Author, Copyright_Year
 
+b.
+For each book there must be several listings - one for each different author, then for each book and author, we need another record for each Edition and Copyright_Year. Therefore Book determines Author and also determines Edition, Year. Therefore for a book with two authors and two Editions it is necessary to have four rows in the table for just that one book.
+
+c.
+* denotes primary key
+** denotes foreign key
+
+Book (ID*, name, edition, year)
+Author (ID*, name)
+Book_Author(bookID**, authorID**)
+
+Book:
+ID -> name, edition, year
+Author:
+ID -> name
+Book_Author:
+no FDs
+
+This is in BCNF, shown by the FDs above. This is also in 4NF because there are no longer any MVDs. 
 
