@@ -1,4 +1,4 @@
- -- Load the grading database. 
+ -- Load the StudyAbroad database. 
 -- See ../README.md for details.
 
 -- Drop the previous table declarations.

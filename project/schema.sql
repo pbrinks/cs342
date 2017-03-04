@@ -1,3 +1,4 @@
+-- StudyAbroad tables
 
 create table Department (
 	code varchar(4) PRIMARY KEY,
