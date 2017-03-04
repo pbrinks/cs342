@@ -47,27 +47,29 @@ create table ProgramParticipant (
 	
 create table Review (
 	id integer PRIMARY KEY,
+	participantID integer,
+	programID integer,
 	text varchar(200),
 	rating integer CHECK (rating <= 5)
 	);
 	
 create table Trip (
 	id integer PRIMARY KEY,
-	name varchar(50),
 	location varchar(50),
 	timeLength varchar(50),
 	totalCost float,
-	description varchar(100)
+	description varchar(200)
 	);
 	
 create table Attraction (
 	id integer PRIMARY KEY,
+	name varchar(50),
 	city varchar(20),
 	timeLength varchar(50),
 	cost float
 	);
 	
-create table TripAttraction (
+create table TripAttraction (	
 	tripID integer,
 	attractionID integer,
 	PRIMARY KEY (tripID, attractionID),

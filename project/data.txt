@@ -1,0 +1,37 @@
+Paige Brinks
+cs 342
+Project Design
+03/03/2017
+
+I randomly generated my data using generatedata.com.
+
+
+Functional Dependencies:
+Department:
+code -> fullName
+
+Professor:
+id -> firstName, lastName, dept
+
+Program:
+id -> dept, courseNumber, professorID, semester, country, city, cost, description, capacity
+
+Participant:
+id -> firsName, lastName, brithDate, major, grade
+
+ProgramParticipant:
+no nontrivial FDs
+
+Review:
+id -> participantID, programID, text, rating
+
+Trip:
+id -> name, location, timeLength, totalCost, description
+
+Attraction:
+id -> city, timeLength, cost
+
+TripAttraction:
+no nontrivial FDs
+
+The functional dependencies above show that all fields in all tables are determined by a minimal candidate key. Therefore they are all in BCNF. Also, there are no multivalued dependencies, meaning this schema is also in 4NF.
