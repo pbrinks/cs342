@@ -1,3 +1,8 @@
+-- Paige Brinks
+-- cs 342
+-- guide 06
+-- 03/06/2017
+
 -- Advanced SQL (Section 7.1, continued) — Write sample queries that:
 
 -- 1.	Implement an inner join (Section 7.1.6).
