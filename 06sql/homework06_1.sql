@@ -5,8 +5,8 @@
 
 -- a.
 select * from (select e1.employee_id, 
-				e1.first_name || ' ' || e1.last_name as manager_name, 
-				count(*) as employee_count
+		e1.first_name || ' ' || e1.last_name as manager_name, 
+		count(*) as employee_count
 	from Employees e1, Employees e2
 	where e2.manager_id = e1.employee_id
 	group by e1.employee_id, e1.first_name || ' ' || e1.last_name
@@ -32,6 +32,6 @@ ON d.manager_id = e.employee_id;
 -- d.
 select d.department_name, avg(e.salary) as average_salary
 from (departments d LEFT OUTER JOIN employees e
-		ON d.department_id = e.department_id)
+	ON d.department_id = e.department_id)
 group by d.department_name
 order by avg(e.salary) desc;
