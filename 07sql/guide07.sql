@@ -34,15 +34,21 @@ AND md.directorID = d.id;
 
 -- 2. Formal languages for the relational model (Chapter 8, for Wednesday)
 
--- a.	Relational Algebra (read Sections 8.1–8.3 & 8.5) — Write a simple query on the movies database using SELECT (σcondition), PROJECT (πfieldlist), RENAME (ρnewName) and JOIN (⋈condition) (see example queries 1 & 2 in Section 8.5).
+-- a.	Relational Algebra (read Sections 8.1–8.3 & 8.5) — Write a simple query on the movies database using SELECT (σcondition), PROJECT (πfieldlist), RENAME (ρnewName)(←) and JOIN (⋈condition) (see example queries 1 & 2 in Section 8.5).
+-- select all movie names that are Dramas
+
+-- DRAMAS ρnewName πfieldlist name(σcondition genre='Drama'(MOVIE ⋈condition id=movieID(MOVIEGENRE)))
 
 -- b.	Tuple Relational Calculus (read Sections 8.6.1–8.6.3 & 8.6.8) — Write a simple query on the movies database using the tuple relational calculus queries (see example queries 0 & 1 in Section 8.6.4).
+--	{t.name, t.year | MOVIE(t) AND t.rank > 8}
 
 -- c.	Define the following terms):
 
---		i.	Existential and universal quantifiers (see Section 8.6.3).
-
+--		i.	Existential (∃) and universal (∀) quantifiers (see Section 8.6.3).
+		-- Existential quanitifiers: a formula (∃t)(F) is true if there exists some tuple that makes F true. 
+		-- Universal quantifiers: (∀t)(F) is true if every possible tuple that can be assigned to free occurrences of t in F is substituted for t, and F is true for every such substitution.
 -- 		ii.	safe expressions (see Section 8.6.8).
+		-- an expression that is guarenteed to yield a finite number o ftuples as its result. Otherwise the expression is considered unsafe.
 
 -- Write your solutions either in ASCII (e.g., SELECT_condition), Unicode (e.g., σcondition) or using hand-writing.
 
