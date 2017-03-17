@@ -28,4 +28,4 @@ where ID = 4;
 
 -- d.
 drop view birthday_czar;
--- This does not affect the base table at all. The view is just pulling values from the table, not affecting anything in the table.
+-- This does not affect the base table at all. The view is just pulling values from the table, not affecting anything in the table. 

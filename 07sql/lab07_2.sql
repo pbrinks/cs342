@@ -1,6 +1,6 @@
 -- Paige Brinks
 -- cs 342
--- lab 7 part 1
+-- lab 7 part 2
 -- 3/17/2017
 
 
