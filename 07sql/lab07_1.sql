@@ -24,7 +24,7 @@ where ID = 4;
 -- c. 
 -- insert into birthday_czar values ('Paige Brinks', 22, '07-NOV-1994');
 -- This does not work because my view is not key-preserved. In order to make this possible, I would need to select the ID from person as well.
--- I also cannot insert into name unless I seperate firstName and lastName into seperate columns in my view, and I cannot insert into age because I am calculating the age from birthdate. 
+-- I also cannot insert into name unless I seperate firstName and lastName into seperate columns in my view, and I cannot insert into age because it is a derived field and I am calculating the age from birthdate. 
 
 -- d.
 drop view birthday_czar;
