@@ -1,0 +1,67 @@
+Paige Brinks
+cs 342
+guide 08
+3/27/2017
+
+1.	Read Sections 10.1, 10.4.1 & 26.1.1–2:
+
+	a.	Name the three basic approaches to database programming.
+		1) Embedding database commands in a general-purpose programming language
+		2) Using a library of database functions or classes
+		3) Designing a brand new language
+
+	b.	Explain the concepts of:
+
+		i.	impedance mismatch - refers to problems that occur because of differences between the database model and the programming language model.
+
+		ii.	stored procedures - procedures or functions that are stored and executed by the DBMS at the database server.
+
+		iii. triggers - a technique for specifying certain types of active rules. Oracle automatically executes a trigger when a specified event takes place, which may be in the form of a system event or a DML statement being issued against the table
+
+2.	Read Server-Side Programming: PL/SQL and Java.. Focus on server-side programming, PL/SQL and triggers; skip the section on “Overview of Java in Oracle Database”.
+
+	a.	Compare and contrast:
+
+		i.	procedural vs non-procedural languages.
+			- procedural language: most statement execution depends on previous or subsequent statements and on control structures.
+			- non-procedural language: the set of data to be operated on is specified, but not the operations to be performed or the manner in whuch they are to be carried out.
+
+		ii.	client-side vs server-side database programming.
+			- client-side programming is used to embed SQL statements in applications written in procedural languages. 
+			- Server-side programming is used to develop data logic that resides in the database.
+
+	b.	Explain why one would want to do server-side programming using PL/SQL.
+		- PL/SQL provides the following advantages:
+			- improved performance
+			- memory allocation
+			- improved productivity
+			- integrity
+			- security with definer's rights procedures
+			- inherited priviledges and schema context with invoker's rights procedures
+		
+	c.	For each of the following code segments, identify the type of the database object and explain what it does.
+
+		CREATE PROCEDURE limited_count (limit IN integer) AS
+		BEGIN
+		  FOR i IN 1..limit LOOP
+			  dbms_output.put_line(i);
+		  END LOOP;
+		END;
+		
+		- this is a stored procedure, which outputs a count starting at 1 until it reaches the number inputted as the parameter
+		 
+
+		BEGIN
+		  dbms_output.put_line('Hello, PL/SQL!');
+		END;
+		 
+		 - this is an anonymous block, which outputs 'Hello, PL/SQL!' once
+
+		CREATE TRIGGER log_trigger
+		  BEFORE INSERT OR UPDATE OF lastName ON Person
+		  FOR each row
+		BEGIN
+		  dbms_output.put_line('Hello, name change!');
+		END;
+		
+		- this is a row trigger which outputs 'Hello, name change!' every time lastName is updated in the Person relation
