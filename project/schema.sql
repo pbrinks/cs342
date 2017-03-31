@@ -22,16 +22,17 @@ create table Professor (
 		
 create table Program (
 	id integer PRIMARY KEY,
+	dept varchar(4),
 	courseNumber integer,
 	professorID integer,
-	semester char(1),
+	semester char(1) CHECK ( semester IN ('F', 'S', 'I')),
 	country varchar(50),
 	city varchar(50),
 	cost float,
 	description varchar(200),
 	capacity integer,
-	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL,
-	FOREIGN KEY (semester) REFERENCES SemesterCode(semester) ON DELETE SET NULL
+	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL,
+	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL
 	);
 		
 create table Participant (
