@@ -72,7 +72,7 @@ update mat_emp_dept
 -- d.
 insert into mat_emp_dept (employee_id, first_name, last_name, email, hire_date, department_name)
 values
-(207, 'Beka', 'Agava', 'baa8@email.com', '08-MAR-2017', 'Payroll');
+(207, 'Beka', 'Agava', 'bagava', '08-MAR-2017', 'Payroll');
 -- see error on part b
 -- a materialized view is read only and cannot be updated 
 
