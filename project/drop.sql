@@ -9,3 +9,5 @@ DROP TABLE Participant;
 DROP TABLE Program;
 DROP TABLE Professor;
 DROP TABLE Department;
+DROP TABLE GradeLevel;
+DROP TABLE SemesterCode;

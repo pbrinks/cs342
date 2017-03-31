@@ -9,29 +9,36 @@ I randomly generated my data using generatedata.com.
 Functional Dependencies:
 Department:
 code -> fullName
+candidate key: code
 
 Professor:
 id -> firstName, lastName, dept
+candidate key: id
 
 Program:
 id -> dept, courseNumber, professorID, semester, country, city, cost, description, capacity
+candidate key: id
 
 Participant:
 id -> firsName, lastName, brithDate, major, grade
+candidate key: id 
 
 ProgramParticipant:
 no nontrivial FDs
 
 Review:
 id -> participantID, programID, text, rating
+candidate key: id
 
 Trip:
 id -> name, location, timeLength, totalCost, description
+candidate key: id
 
 Attraction:
 id -> city, timeLength, cost
+candidate key: id
 
 TripAttraction:
 no nontrivial FDs
 
-The functional dependencies above show that all fields in all tables are determined by a minimal candidate key. Therefore they are all in BCNF. Also, there are no multivalued dependencies, meaning this schema is also in 4NF.
+The functional dependencies above show that all fields in all tables are determined by a minimal candidate key. Therefore they are all in BCNF. Also, there are no multivalued dependencies, meaning this schema is also in 4NF. I chose to use 4NF because it eliminates harmful redundancy, and is the highest normal form we are using in class (and therefore the best).

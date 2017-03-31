@@ -1,4 +1,11 @@
 -- StudyAbroad tables
+create table SemesterCode(
+	semester char(1) PRIMARY KEY
+);
+
+create table GradeLevel (
+	grade varchar(9) PRIMARY KEY
+	);
 
 create table Department (
 	code varchar(4) PRIMARY KEY,
@@ -12,30 +19,30 @@ create table Professor (
 	dept varchar(4),
 	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL
 	);
-	
+		
 create table Program (
 	id integer PRIMARY KEY,
-	dept varchar(4),
 	courseNumber integer,
 	professorID integer,
-	semester char(1) CHECK ( semester IN ('F', 'S', 'I')),
+	semester char(1),
 	country varchar(50),
 	city varchar(50),
 	cost float,
 	description varchar(200),
 	capacity integer,
-	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL,
-	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL
+	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL,
+	FOREIGN KEY (semester) REFERENCES SemesterCode(semester) ON DELETE SET NULL
 	);
-	
+		
 create table Participant (
 	id integer PRIMARY KEY,
 	firstName varchar(20),
 	lastName varchar(20),
 	birthDate date,
 	major varchar(4),
-	grade varchar(9) CHECK (grade in ('Freshman', 'Sophomore', 'Junior', 	'Senior', 'Other')),
-	FOREIGN KEY (major) REFERENCES Department(code) ON DELETE SET NULL
+	grade varchar(9), 
+	FOREIGN KEY (major) REFERENCES Department(code) ON DELETE SET NULL,
+	FOREIGN KEY (grade) REFERENCES GradeLevel(grade) ON DELETE SET NULL
 	);
 	
 create table ProgramParticipant (
@@ -51,7 +58,9 @@ create table Review (
 	participantID integer,
 	programID integer,
 	text varchar(200),
-	rating integer CHECK (rating <= 5)
+	rating integer CHECK (rating <= 5),
+	FOREIGN KEY (participantID) REFERENCES Participant(id) ON DELETE CASCADE,
+	FOREIGN KEY (programID) REFERENCES Program(id) ON DELETE CASCADE
 	);
 	
 create table Trip (
