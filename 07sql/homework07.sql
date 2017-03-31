@@ -45,7 +45,7 @@ drop materialized view mat_emp_dept;
 create materialized view mat_emp_dept as
     select e.employee_id, e.first_name,  e.last_name, 
         e.email, e.hire_date, d.department_name
-    from hr.employees e, departments d
+    from employees e, departments d
     where e.department_id = d.department_id;
     
 -- a.
