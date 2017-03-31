@@ -37,7 +37,8 @@ BEGIN
 		raise duplicateActor;
 	END IF;
 	
-	SELECT COUNT(*) INTO castingCounter FROM Role;
+	SELECT COUNT(*) INTO castingCounter FROM Role
+	WHERE movieId = :new.movieID;
 	IF castingCounter >= 230 THEN
 		raise movieFull;
 	END IF;
