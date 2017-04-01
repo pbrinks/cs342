@@ -8,6 +8,7 @@ select  p.dept, p.courseNumber, avg(r.rating)
 from Review r, Program p
 where r.programID = p.ID
 group by p.dept, p.courseNumber;
+-- I would not implement this a different way
 		
  
 -- This shows all the written reviews for semester abroad class IS 192 
@@ -22,7 +23,11 @@ where r.participantID = part.ID
 and r.programID = prog.ID
 and prog.dept = 'IS'
 and prog.courseNumber = '192';
- 
+-- I would probably prefer to implement this as a procedure 
+-- which would take in the program dept and courseNumber as parameters
+-- and would therefore be more adaptable per student.
+-- I did not create a procedure because that is included in the next 
+-- project deliverable 
  
  
 -- query of the count of all the Participants who are currently registered for each semester abroad
@@ -32,7 +37,7 @@ select prog.dept, prog.courseNumber, count(pp.participantID)
 from Program prog LEFT OUTER JOIN ProgramParticipant pp
 ON pp.programID =  prog.ID
 group by prog.dept, prog.courseNumber;
-
+-- I would not implement this another way
 
 -- This table gives all of the attractions visited during a trip during the semester abraod
 -- couse  CS 333. This query is useful because by switching out the dept, courseNumber and date, 
@@ -72,11 +77,11 @@ and exists (select * from ProgramParticipant pp2
 -- and prog.courseNumber = 333
 -- and pp1.participantID = part.ID;
 -- which I would have preferred to use, but I used a subselect because I needed one for the project
+-- I would also like to create this as a procedure that takes in the Program dept and courseNumber as parameter
 
 -- this is a view which shows all students in a semester abroad and what program they are taking part in
 -- along with some basic information about that program
 -- this could be used by the registrar, to see what students are enrolled in what programs
-
 drop view part_progs;
 
 create view part_progs as
