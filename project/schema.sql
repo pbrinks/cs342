@@ -66,10 +66,12 @@ create table Review (
 	
 create table Trip (
 	id integer PRIMARY KEY,
+	programID integer,
 	location varchar(50),
 	timeLength varchar(50),
 	totalCost float,
-	description varchar(200)
+	description varchar(200),
+	FOREIGN KEY (programID) REFERENCES Program(id) ON DELETE CASCADE
 	);
 	
 create table Attraction (
@@ -83,7 +85,8 @@ create table Attraction (
 create table TripAttraction (	
 	tripID integer,
 	attractionID integer,
-	PRIMARY KEY (tripID, attractionID),
+	visit_date date,
+	PRIMARY KEY (tripID, attractionID, visit_date),
 	FOREIGN KEY (tripID) REFERENCES Trip(id) ON DELETE SET NULL,
 	FOREIGN KEY (attractionID) REFERENCES Attraction(id) ON DELETE SET NULL
 	);
