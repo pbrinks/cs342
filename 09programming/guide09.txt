@@ -34,15 +34,28 @@ guide 09
 		- bitmap index is advisable for systems in which data is not frequently updated by many concurrent systems. Good for low cardinality problems.
 		
 		iii.	Explain whether denormalization should be considered a form of PDD.
-		- 
+		- yes it should. Denormalization is the structuring of data in storage that guarentees good performance. Denormalization can affect that a lot - if the table is data is needed for a lot of read commands, then denormalization would give it better performance. However, if the relation is going to be more write heavy, then denormalization would not be a good way to go. 
 
 2.	Chapter 18
 
 	a.	Explain the concept of query optimization (see the introduction to the chapter).
-	- The process of choosing a suitable execution strategy.
+	- The process of choosing a suitable execution strategy - how the internal representation of the query is created, after scanning, parsing and validating the query.
 3.	Oracle’s EXPLAIN PLAN
 
 	a.	Load the small version of the Internet Movie DB defined in the repo (cs342/databases/imdb), configure the auto-trace facility in SQL*Plus (SET SERVEROUTPUT ON; & SET AUTOTRACE ON;) and generate an execuation plan for some simple query. What is the execution plan operation used and what does that operation do?
+	- oracles EXPLAIN PLAN statement displays execution plans chosen by the optimizer for SELECT, UPDATE, INSERT, and DELETE statements. It is the sequence of operations that the database performs to run the statement.
+	
+	explain plan for
+		select * from Movie;
+		
+	explain plan
+		set statement_id = 'st1'
+		for select name from Movie;
+		
+	select plan_table_output from table(dbms_xplan.display());
+	
+	- used table access full - reads the entire table as stored on the disk. A full table scan must inspect all table rows so it can also consume a considerable amount of CPU time.
+	
 
 	b.	Explain at least the following operations (see Oracle Execution Plan Operations).
 
