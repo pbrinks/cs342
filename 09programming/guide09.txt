@@ -39,7 +39,7 @@ guide 09
 2.	Chapter 18
 
 	a.	Explain the concept of query optimization (see the introduction to the chapter).
-
+	- The process of choosing a suitable execution strategy.
 3.	Oracle’s EXPLAIN PLAN
 
 	a.	Load the small version of the Internet Movie DB defined in the repo (cs342/databases/imdb), configure the auto-trace facility in SQL*Plus (SET SERVEROUTPUT ON; & SET AUTOTRACE ON;) and generate an execuation plan for some simple query. What is the execution plan operation used and what does that operation do?
@@ -47,10 +47,21 @@ guide 09
 	b.	Explain at least the following operations (see Oracle Execution Plan Operations).
 
 			TABLE ACCESS FULL
+			- reads the entire table as stored on the disk. A full table scan must inspect all table rows so it can also consume a considerable amount of CPU time.
+			
 			TABLE ACCESS BY INDEX
+			- Retrieves a row from the table using the ROWID retrieved from the preceding index lookup.
+			- An index is a distinct structure in the database that is built using the create index statement. It requires its own disk space and holds a copy of the indexed table data. That means that an index is pure redundancy. Creating an index does not change the table data; it just creates a new data structure that refers to the table.
+			
 			NESTED LOOPS
+			- join algorithm. It works like using two nested queries: the outer or driving query to fetch the results from one table and a second query for each row from the driving query to fetch the corresponding data from the other table.
+			
 			HASH JOIN
+			- Loads the candidate records from one side of the join into a hash table that is then probed for each row from the other side of the join. 
+			
 			INDEX UNIQUE SCAN
+			- Performs the B-tree traversal only. The database uses this operation if a unique constraint ensures that the search criteria will match no more than one entry. 
+			
 			
 			
 For Oracle’s reference documentation, see Database Performance Tuning Guide, particularly the “Using EXPLAIN PLAN” section. Note that the text also explains these operations conceptually in Chapter 18.
