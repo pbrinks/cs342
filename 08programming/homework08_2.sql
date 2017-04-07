@@ -21,10 +21,8 @@ create table BaconTable (
 create procedure computeBN(p_actorId IN INTEGER, status IN INTEGER) IS
 	counter INTEGER default 0;
 BEGIN
-	-- check if current actor is kevin bacon
-	IF p_actorId = 22591 THEN 
-		INSERT INTO BaconTable VALUES (p_actorId, 0);
-	END IF;
+	-- insert current actor
+	INSERT INTO BaconTable VALUES (p_actorId, status);
 	
 	-- select all actors in all movies that p_actor is in
 	FOR actor in 
@@ -35,11 +33,12 @@ BEGIN
 		select count(*) into counter from BaconTable bt
 		where actor.actorId = bt.actorId;
 
-		-- there are only 41 movies in the db, therefore actors cannot be more than 41 movies away
-		IF counter < 1 and status < 41 THEN
-			INSERT INTO BaconTable VALUES (actor.actorId, (status+1));
+		-- there are only 41 movies in db, if actor has greater bacon number than 41, skip them for now (otherwise throws error: maximum open cursors exceeded). They should be connected by another actor in the same movie and therefore be added later
+		 IF counter = 0 and status < 41 THEN
 			computeBN(actor.actorId, (status+1));
-		ELSE
+		 ELSE
+			-- if actor already exists, but has a higher number, update it
+			-- if they do not exist yet, this won't do anything
 			update BaconTable 
 				set baconNumber = (status+1)
 				where actor.actorId = BaconTable.actorId
@@ -54,3 +53,13 @@ begin
 	computeBN(22591, 0);
 end;
 /
+
+-- tests
+
+-- kevin bacon: should be 0
+select * from BaconTable
+where actorID = 22591;
+
+-- should be 1
+select * from BaconTable
+where actorID = 36005;
