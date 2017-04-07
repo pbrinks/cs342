@@ -51,7 +51,7 @@ BEGIN
 END;
 /
 
-
+SHOW ERRORS;
 
 -- a. Cast George Clooney (# 89558) as “Danny Ocean” in Oceans Eleven (#238072). N.b., he’s already cast in this movie.
 
