@@ -20,7 +20,7 @@ a. Yes Oracle handles the transaction life-cycle. If we add a movie and do not c
 b. Atomicity: yes, if any part of the transaction fails, it will be rolled back. It will not only commit part of it.
 Consistency: yes, cannot make a transaction that violates any part of schema - it will be run a rollback, and will not commit.
 Isolation: no, for example: if we submit a new movie in both sessions, they may be different movies but get assigned the same primary key. Both will be successful, but when we try and commit them, it will give conflicts. This violates isolation. 
-Durability: if the system crashes and your changes have not been committed, they will be rolled-back. Save-points can help with durability, anything before a save-point will be saved.
+Durability: if the system crashes and your changes have not been committed, they will be rolled-back. Anything commited will be saved. Save-points can help with durability, anything before a save-point will be saved.
 
 
 
