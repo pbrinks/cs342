@@ -1,0 +1,26 @@
+Paige Brinks
+cs 342
+lab 10 part 1
+4/12/2017
+
+
+- query the movie table
+	gives same result
+- delete a movie and query the modified table
+	delete from Movie where id = 238071;
+	- this deleted query was only deleted in the session I deleted it in. When ran comit;
+	 it then showed as deleted in the other SQL*Plus session.
+- rollback undid whatever I last did ( in this case it put ocean's 11 back in the db)
+- add a new movie and query - same result - this movie only showed in the session I added the it in.
+- commmit: now the movie appears in both sessions
+
+
+a. Yes Oracle handles the transaction life-cycle. If we add a movie and do not commit, and then exit the session, then the Movie will automatically have been comitted. Unless the transaction is completely successful and we commit our result, then the transaction will be rolled-back and not saved. If the transaction has an error or anything, it will not commit.
+
+b. Atomicity: yes, if any part of the transaction fails, it will be rolled back. It will not only commit part of it.
+Consistency: yes, cannot make a transaction that violates any part of schema - it will be run a rollback, and will not commit.
+Isolation: no, for example: if we submit a new movie in both sessions, they may be different movies but get assigned the same primary key. Both will be successful, but when we try and commit them, it will give conflicts. This violates isolation. 
+Durability: If the system crashes and your changes have not been committed, they will be rolled-back. Save-points can help with durability, anything before a save-point will be saved.
+
+
+
