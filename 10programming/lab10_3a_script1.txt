@@ -1,0 +1,25 @@
+Paige Brinks
+cs 342
+lab 10 part 2a
+4/13/2017
+
+set autocommit off;
+
+script1
+
+-- (step 1) read from the Movie database 
+	select * from Movie where id = 238071;
+	-- rank starts at 8.5
+
+-- (step 2 - in script2) read from the Movie database 
+
+-- (step 3) update (subtract 0.1) the rank of Movie 238071
+		update Movie
+		set rank = (rank - 0.1)
+		where id = 238071;
+commit;
+
+-- (step 4 - in script2) update (add 0.5) the rank Movie 238071
+
+
+Oracle automatically locks the tables when we are writing to them, so we are unable to run the update statement in script 2 until the update in script 1 has committed. When trying to run both updates at the same time, the second one will get "stuck" until the first update run is comitted. By adding a commit after each update, we are insuring that two updates do not happen at the same time and therefore are insuring that the property of isolation is kept. 

@@ -3,6 +3,8 @@ cs 342
 lab 10 part 2a
 4/13/2017
 
+set autocommit on;
+
 steps for lost update concurrency problem:
 script1
 

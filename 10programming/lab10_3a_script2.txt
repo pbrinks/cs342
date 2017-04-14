@@ -3,9 +3,8 @@ cs 342
 lab 10 part 2
 4/13/2017
 
-set autocommit on;
+set autocommit off;
 
-steps for lost update concurrency problem:
 script2
 
 -- (step 1 - in script1) read from the Movie database 
@@ -17,8 +16,12 @@ script2
 -- (step 3 - in script1) update (subtract 0.1) the rank of Movie 238071		
 		
 -- (step 4) update (add 0.5) the rank Movie 238071
-update Movie
-set rank = (rank + 0.5)
-where id = 238071;
+		update Movie
+		set rank = (rank + 0.5)
+		where id = 238071;
+commit;
 
--- the rank of this movie should now be 8.9, however, the update in script1 gets lost. This results in a new rank of 9.0.
+-- see explanation in script1
+
+
+
