@@ -7,13 +7,14 @@ SET AUTOTRACE TRACEONLY;
 SET SERVEROUTPUT ON;
 SET TIMING ON;
 
--- create index directorNameIndex on Director (firstName, lastName);
--- create index mdIndex on MovieDirector (directorID, movieId);
--- select m.id, m.name, m.year from Director d, Movie m, MovieDirector md
--- where d.firstName = 'Clint'
--- and d.lastName = 'Eastwood'
--- and d.id = md.directorID
--- and md.movieId = m.id;
+create index directorNameIndex on Director (firstName, lastName);
+create index mdIndex on MovieDirector (directorID, movieId);
+
+select m.id, m.name, m.year from Director d, Movie m, MovieDirector md
+where d.firstName = 'Clint'
+and d.lastName = 'Eastwood'
+and d.id = md.directorID
+and md.movieId = m.id;
 
 -- before adding indexes:
 ----------------------------------------------------------------------------------------------
@@ -46,18 +47,16 @@ SET TIMING ON;
 
 --  adding the actorNameIndex index removed a table access full and replaced it with an index range scan. Since table access full has to loop through all rows in the table, this is much faster. Adding the mdIndex switched a hash join to now be a nested loop, which ran faster (0.01 secs (nested loop) compared to 0.03 secs (hash join)). Another way to implement this was to create mdIndex on MovieDirector (movieId, directorID) ( instead of on MovieDirector (directorID, movieId) ), which kept the hash join. In some cases hash joins can be faster than nested loops, but in this case the timing was always shorter with the nested loop, so that is why I chose to implement it the way I did.
 
--- drop index directorNameIndex;
--- drop index mdIndex;
+drop index directorNameIndex;
+drop index mdIndex;
 
 
 
--- select d.firstName || ' ' || d.lastName as director, count(md.movieID)
--- from Director d, MovieDirector md
--- where d.id = md.directorID
--- group by d.firstName || ' ' || d.lastName
--- having count(md.movieID) > 200;
-
-
+select d.firstName || ' ' || d.lastName as director, count(md.movieID)
+from Director d, MovieDirector md
+where d.id = md.directorID
+group by d.firstName || ' ' || d.lastName
+having count(md.movieID) > 200;
 
 -- before optimization:
 ----------------------------------------------------------------------------------------------
@@ -73,11 +72,11 @@ SET TIMING ON;
 
 -- i originally was selecting and grouping by count(m.id), however, when I switched to count(*), even though the operations performed where the same, the times it took to operate them were faster. Here is the new result:
 
--- select d.firstName || ' ' || d.lastName as director, count(1)
--- from Director d, MovieDirector md
--- where d.id = md.directorID
--- group by d.firstName || ' ' || d.lastName
--- having count(*) > 200;
+select d.firstName || ' ' || d.lastName as director, count(1)
+from Director d, MovieDirector md
+where d.id = md.directorID
+group by d.firstName || ' ' || d.lastName
+having count(*) > 200;
 
 ----------------------------------------------------------------------------------------------
 -- | Id  | Operation            | Name          | Rows  | Bytes |TempSpc| Cost (%CPU)| Time     |
@@ -94,17 +93,17 @@ SET TIMING ON;
 -- I also tested selecting and grouping by d.firstName, d.lastName instead of concatenating them, however, this did not appear to make a difference in the performance times.
 
 
--- create index roleIndex on Role (actorId, movieID);
+create index roleIndex on Role (actorId, movieID);
 
--- select a.firstName || ' ' || a.lastName as actor, avg(m.rank)
--- from Actor a, Role r, Movie m
--- where a.id = r.actorId
--- and r.movieId = m.id
--- group by a.firstName || ' ' || a.lastName
--- having avg(m.rank) > 8.5
--- and count(m.id) >= 10;
+select a.firstName || ' ' || a.lastName as actor, avg(m.rank)
+from Actor a, Role r, Movie m
+where a.id = r.actorId
+and r.movieId = m.id
+group by a.firstName || ' ' || a.lastName
+having avg(m.rank) > 8.5
+and count(m.id) >= 10;
 
--- drop index roleIndex;
+drop index roleIndex;
 
 -- original execution plan:
 ---------------------------------------------------------------------------------------
@@ -124,17 +123,17 @@ SET TIMING ON;
 -- tried to create index roleIndex on Role (actorId, movieID), but was given the following error:
 -- ORA-01652: unable to extend temp segment by 128 in tablespace SYSTEM
 
--- create index mRank on Movie (rank, id);
+create index mRank on Movie (rank, id);
 
--- select a.firstName || ' ' || a.lastName as actor, avg(m.rank)
--- from Actor a, Role r, Movie m
--- where a.id = r.actorId
--- and r.movieId = m.id
--- group by a.firstName || ' ' || a.lastName
--- having avg(m.rank) > 8.5
--- and count(*) >= 10;
+select a.firstName || ' ' || a.lastName as actor, avg(m.rank)
+from Actor a, Role r, Movie m
+where a.id = r.actorId
+and r.movieId = m.id
+group by a.firstName || ' ' || a.lastName
+having avg(m.rank) > 8.5
+and count(*) >= 10;
 
--- drop index mRank;
+drop index mRank;
 -- this time replacing count(m.id) with count(*) did not actually decrease the time at all. 
 -- Adding the mRank index did remove a TABLE ACCESS FULL operation and replace it with an INDEX FAST FULL SCAN. It also decreased the times of almost all of the other operations as well. The new execution plan is as follows:
 
