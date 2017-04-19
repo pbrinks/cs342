@@ -1,0 +1,44 @@
+Paige Brinks
+cs 342
+guide 11
+4/18/2017
+
+1.	Read Your First Cup: An Introduction to the Java EE Platform — Focus on Chapter 2, “Understanding Java Platform, Enterprise Edition”
+
+	a.	Explain the tiers discussed in the article. On which does J2EE focus? On which to the Oracle database focus?
+	-	In a multi-tiered application, the functionality of the application is separated into isolated functional areas, called tiers. Typically, multi-tiered applications have a client tier, a middle tier, and a data tier (often called the enterprise information systems tier). The client tier consists of a client program that makes requests to the middle tier. The middle tier is divided into a web tier and a business tier, which handle client requests and process application data, storing it in a permanent datastore in the data tier.
+	-	Java EE application development concentrates on the middle tier to make enterprise application management easier, more robust, and more secure.
+
+	b.	Explain the nature of a J2EE container. What sort of containers are there?
+	-	Java EE containers are the interface between the component and the lower-level functionality provided by the platform to support that component. The functionality of the container is defined by the platform and is different for each component type. Nonetheless, the server allows the different component types to work together to provide functionality in an enterprise application.
+	-	containers are: web container, EJB container, application client container
+
+2.	Read The Java EE Tutorial — This tutorial provides extensive material on J2EE; focus on the sections listed here.
+
+	a.	Sections 1.7–1.8, “Java EE 7 APIs” — Explain the purpose of these technologies (only): JPA, JTA, JAX-RS*, JDBC, JAXB.
+	-	JPA: Java Persistence API - The Java standards–based solution for persistence. Persistence uses an object/relational mapping approach to bridge the gap between an object-oriented model and a relational database.
+	-	JTA: Java Transaction API - provides a standard interface for demarcating transactions. The Java EE architecture provides a default auto commit to handle transaction commits and rollbacks. An auto commit means that any other applications that are viewing data will see the updated data after each database read or write operation. However, if your application performs two separate database access operations that depend on each other, you will want to use the JTA API to demarcate where the entire transaction, including both operations, begins, rolls back, and commits.
+	-	JAX-RS: Java API for RESTful Web Services - defines APIs for the development of web services built according to the Representational State Transfer (REST) architectural style. A JAX-RS application is a web application that consists of classes packaged as a servlet in a WAR file along with required libraries.
+	-	JDBC: Java Database Connectivity API - lets you invoke SQL commands from Java programming language methods. You use the JDBC API in an enterprise bean when you have a session bean access the database. You can also use the JDBC API from a servlet or a JSP page to access the database directly without going through an enterprise bean.
+	- 	JAXB: Java Architecture for XML Binding - provides a convenient way to bind an XML schema to a representation in Java language programs. JAXB can be used independently or in combination with JAX-WS, in which case it provides a standard data binding for web service messages. All Java EE application client containers, web containers, and EJB containers support the JAXB API.
+	
+	b.	Section 5, “Packaging Applications” — Compare and contrast JARs, WARs & EARs.
+	-	JAR: Java Archive File
+	-	WAR: Web Archive File - Enterprise beans often provide the business logic of a web application. In these cases, packaging the enterprise bean within the web application's WAR module simplifies deployment and application organization. Enterprise beans may be packaged within a WAR module as Java programming language class files or within a JAR file that is bundled within the WAR module.
+	-	EAR: Enterprise Archive File - contains Java EE modules and, optionally, deployment descriptors
+	-	 A WAR or EAR file is a standard JAR (.jar) file with a .war or .ear extension. Using JAR, WAR, and EAR files and modules makes it possible to assemble a number of different Java EE applications using some of the same components. No extra coding is needed; it is only a matter of assembling (or packaging) various Java EE modules into Java EE JAR, WAR, or EAR files.
+
+3.	Review these tutorials, on which the lab is based: Developing a Java EE Application & Creating and Running Your First RESTful Web Service.
+
+	a.	Identify the IDE we’ll use for J2EE development.
+	- 	IntelliJ
+
+	b.	Identify the roles of the following technologies in the J2EE application: J2SE’s JDK; GlassFish.
+	-	JDK: Java Development Kit
+	-	GlassFish: application server
+
+	c.	Explain the nature of a RESTful webservice.*
+		1) Use only HTTP mehtods
+		2) Stateless
+		3) Structure-like URIs
+		4) Transfer XML and/or JSON
