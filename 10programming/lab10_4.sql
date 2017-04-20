@@ -23,7 +23,8 @@ EXECUTE incrementRank(238071, .01);
 
 -- this did not run correctly. When I ran it simultaneously in both terminals 
 -- it should have given me a final rank of 1008.5 however it gave me 852.81; 
--- meaning several of the added values from the loops were lost. This violates isolation.
+-- meaning several of the added values from the loops were lost. 
+-- This is a lost update problem and it violates isolation.
 
 drop procedure incrementRank2;
 
@@ -49,5 +50,6 @@ END;
 
 EXECUTE incrementRank2(238071, .01);
 
+-- adding the FOR UPDATE clause insures that the rank column is locked while it is being updated
 -- the final result is now 508.5. It will only run one at a time, which does not allow
--- anything to only get half commited, therefore insuring isolation.
+-- any updates to get lost, therefore insuring isolation.
