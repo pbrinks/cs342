@@ -1,0 +1,27 @@
+Paige Brinks
+cs 342
+lab 11
+4/21/2017
+
+c.	Exploring the project structure — How do the external libraries (in the project pane) relate to J2SE and J2EE?
+	- The J2SE is the JDK (which is Java 1.8)
+	- J2EE is GlassFish; all the libraries in GlassFish are what make it the J2EE
+
+d.	Developing source code — At what tier does this application run? 
+	This is runniing on the web tier.
+	
+e.	Running the application & Modifying the code and observing the changes — What server does this step use to serve up your application? For a hint, look at what’s served up at the URL: /. How does it compare with a typical web server?
+	It is using the Oracle GlassFish server, this is an application server, meanin git can handle Java EE applications (i.e. JSP). A normal web server generally just handles HTTP.
+	
+f.	Exploring a run configuration & Exploring an artifact configuration — Skim through these sections, making sure that you can find the application features they discuss. What is a WAR file?
+	Web application Archive - JAR file used to distrubute collection of JSPs, Servlets, etc.
+	Gets copied into the folder of the web application and run; it is the zipped up directory structure for a J2EE app, used for deployment onto a web server. 
+	
+g.	Packaging the application into a WAR file & Deploying an artifact onto a running server - What’s the difference between “exploded” and non-exploded WAR files?
+	Exploded War is decompressed, the War is compressed
+	
+h.	Compare and contrast EAR and WAR artifacts.
+	EAR conatains all the components that make up a J2EE application, which includes the WAR file, WAR is just for web.
+	
+	
+
