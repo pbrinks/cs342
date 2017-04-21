@@ -1,1 +1,32 @@
- 
+option 1:
+
+-- This table gives all of the attractions visited during a trip during the semester abraod
+-- couse  CS 333. This query is useful because by switching out the dept, courseNumber and date, 
+-- the professor leading the program can see which attractions they will be visiting during which trips
+-- and what date they will be travelling
+
+select ta.visit_date, a.name, t.location, a.timeLength, a.cost from Trip t, 
+        Attraction a, TripAttraction ta, program p
+where p.dept = 'CS'
+and p.courseNumber = 333
+and ta.visit_Date = '03-JUN-10'
+and t.programID = p.ID
+and ta.tripID = t.ID
+and ta.attractionID = a.ID;
+
+
+
+option 2:
+
+-- This shows all the written reviews for semester abroad class IS 192 
+-- this would be helpful for a student wanting to look up the reviews 
+-- of a specific program they are interested in participating in
+-- (could change the prog.dept and prog.courseNumber to look at any program)
+select  part.firstName || ' ' || part.lastName as name,
+        prog.dept || ' ' || prog.courseNumber as course,
+		r.text
+from Participant part, Program prog, Review r
+where r.participantID = part.ID
+and r.programID = prog.ID
+and prog.dept = 'IS'
+and prog.courseNumber = '192';
