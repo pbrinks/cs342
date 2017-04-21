@@ -1,3 +1,4 @@
+DROP reviewTrigger;
 DROP PROCEDURE addTrip;
 DROP SEQUENCE tripSequence;
 

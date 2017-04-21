@@ -40,13 +40,19 @@ END;
 /
 
 
--- test procedure
+-- tests
+
 -- select cost from Program
 -- where dept = 'CS'
 -- and courseNumber = 333;
 
 -- BEGIN
 	-- addTrip(1,'Northern Peninsula','8 hrs','100.00','Visit the beautiful northern peninsula.');
+-- END;
+-- /
+
+-- BEGIN
+	-- addTrip(1,'Northern Peninsula','8 hrs','-100.00','Visit the beautiful northern peninsula.');
 -- END;
 -- /
 
