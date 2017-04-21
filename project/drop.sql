@@ -1,4 +1,5 @@
--- drop tables in StudyAbroad database
+DROP PROCEDURE addTrip;
+DROP SEQUENCE tripSequence;
 
 DROP TABLE TripAttraction;
 DROP TABLE Attraction;
