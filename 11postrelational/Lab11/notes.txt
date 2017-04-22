@@ -1,8 +1,9 @@
-Paige Brinks
+﻿Paige Brinks
 cs 342
 lab 11
 4/21/2017
 
+Exercise 11.1
 c.	Exploring the project structure — How do the external libraries (in the project pane) relate to J2SE and J2EE?
 	- The J2SE is the JDK (which is Java 1.8)
 	- J2EE is GlassFish; all the libraries in GlassFish are what make it the J2EE
@@ -23,5 +24,6 @@ g.	Packaging the application into a WAR file & Deploying an artifact onto a runn
 h.	Compare and contrast EAR and WAR artifacts.
 	EAR conatains all the components that make up a J2EE application, which includes the WAR file, WAR is just for web.
 	
-	
+Exercise 11.2
+b.	To support the GlassFish RESTful Web Service it uses the library javax.ws.rs-api
 
