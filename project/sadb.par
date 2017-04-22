@@ -1,0 +1,4 @@
+DIRECTORY=exp_dir
+DUMPFILE=sadb.dmp 
+LOGFILE=sadb.log
+TABLES=sadb.SemesterCode,sadb.GradeLevel,sadb.Department,sadb.Professor,sadb.Program,sadb.Participant,sadb.ProgramParticipant,sadb.Review,sadb.Trip,sadb.Attraction,sadb.TripAttraction

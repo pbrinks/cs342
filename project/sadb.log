@@ -1,0 +1,29 @@
+;;; 
+Export: Release 11.2.0.2.0 - Production on Fri Apr 21 21:45:13 2017
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+;;; 
+Connected to: Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+Starting "SADB"."SYS_EXPORT_TABLE_01":  sadb/******** parfile=sadb.par 
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 704 KB
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type TABLE_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
+. . exported "SADB"."ATTRACTION"                         7.257 KB      19 rows
+. . exported "SADB"."DEPARTMENT"                         5.718 KB      17 rows
+. . exported "SADB"."GRADELEVEL"                         5.070 KB       5 rows
+. . exported "SADB"."PARTICIPANT"                        7.906 KB      22 rows
+. . exported "SADB"."PROFESSOR"                          6.734 KB      21 rows
+. . exported "SADB"."PROGRAM"                            12.21 KB      23 rows
+. . exported "SADB"."PROGRAMPARTICIPANT"                 5.812 KB      37 rows
+. . exported "SADB"."REVIEW"                             8.468 KB      21 rows
+. . exported "SADB"."SEMESTERCODE"                       5.031 KB       3 rows
+. . exported "SADB"."TRIP"                               8.859 KB      19 rows
+. . exported "SADB"."TRIPATTRACTION"                     6.218 KB      21 rows
+Master table "SADB"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SADB.SYS_EXPORT_TABLE_01 is:
+  C:\USERS\PLB7\DOCUMENTS\PROJECT\SADB.DMP
+Job "SADB"."SYS_EXPORT_TABLE_01" successfully completed at 21:45:16
