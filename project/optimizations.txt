@@ -1,32 +1,76 @@
-option 1:
+This is my original query
+select firstName from Participant part, ProgramParticipant pp1, Program prog
+where pp1.programID = prog.ID
+and prog.dept = 'CS'
+and prog.courseNumber = 333
+and pp1.participantID = part.ID
+and exists (select * from ProgramParticipant pp2
+			where pp2.programID = pp1.programID
+			and pp2.participantID <> part.ID
+			);
 
--- This table gives all of the attractions visited during a trip during the semester abraod
--- couse  CS 333. This query is useful because by switching out the dept, courseNumber and date, 
--- the professor leading the program can see which attractions they will be visiting during which trips
--- and what date they will be travelling
+original execution plan			
+-----------------------------------------------------------------------------------------
+| Id  | Operation              | Name               | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT       |                    |     2 |   214 |     7  (15)| 00:00:01 |
+|*  1 |  HASH JOIN SEMI        |                    |     2 |   214 |     7  (15)| 00:00:01 |
+|   2 |   NESTED LOOPS         |                    |     2 |   162 |     4   (0)| 00:00:01 |
+|   3 |    MERGE JOIN CARTESIAN|                    |    22 |  1210 |     4   (0)| 00:00:01 |
+|*  4 |     TABLE ACCESS FULL  | PROGRAM            |     1 |    30 |     2   (0)| 00:00:01 |
+|   5 |     BUFFER SORT        |                    |    22 |   550 |     2   (0)| 00:00:01 |
+|   6 |      TABLE ACCESS FULL | PARTICIPANT        |    22 |   550 |     2   (0)| 00:00:01 |
+|*  7 |    INDEX UNIQUE SCAN   | SYS_C007009        |     1 |    26 |     0   (0)| 00:00:01 |
+|   8 |   TABLE ACCESS FULL    | PROGRAMPARTICIPANT |    37 |   962 |     2   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------
 
-select ta.visit_date, a.name, t.location, a.timeLength, a.cost from Trip t, 
-        Attraction a, TripAttraction ta, program p
-where p.dept = 'CS'
-and p.courseNumber = 333
-and ta.visit_Date = '03-JUN-10'
-and t.programID = p.ID
-and ta.tripID = t.ID
-and ta.attractionID = a.ID;
+I modified the query so that the subselect was no longer necessary, resulting with this query:
+
+select firstName from Participant part, ProgramParticipant pp1, Program prog
+where pp1.programID = prog.ID
+and prog.dept = 'CS'
+and prog.courseNumber = 333
+and pp1.participantID = part.ID;			
+
+this improved performance a lot. The new execution plan:
+--------------------------------------------------------------------------------------
+| Id  | Operation             | Name        | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT      |             |     2 |   162 |     4   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS         |             |     2 |   162 |     4   (0)| 00:00:01 |
+|   2 |   MERGE JOIN CARTESIAN|             |    22 |  1210 |     4   (0)| 00:00:01 |
+|*  3 |    TABLE ACCESS FULL  | PROGRAM     |     1 |    30 |     2   (0)| 00:00:01 |
+|   4 |    BUFFER SORT        |             |    22 |   550 |     2   (0)| 00:00:01 |
+|   5 |     TABLE ACCESS FULL | PARTICIPANT |    22 |   550 |     2   (0)| 00:00:01 |
+|*  6 |   INDEX UNIQUE SCAN   | SYS_C007009 |     1 |    26 |     0   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------
+
+this removed a HASH JOIN SEMI and a TABLE ACCESS FULL from the execution plan.
 
 
+next I created this index:
+create index progInd on Program (ID, dept, courseNumber);
 
-option 2:
+select firstName from Participant part, ProgramParticipant pp1, Program prog
+where pp1.programID = prog.ID
+and prog.dept = 'CS'
+and prog.courseNumber = 333
+and pp1.participantID = part.ID;
 
--- This shows all the written reviews for semester abroad class IS 192 
--- this would be helpful for a student wanting to look up the reviews 
--- of a specific program they are interested in participating in
--- (could change the prog.dept and prog.courseNumber to look at any program)
-select  part.firstName || ' ' || part.lastName as name,
-        prog.dept || ' ' || prog.courseNumber as course,
-		r.text
-from Participant part, Program prog, Review r
-where r.participantID = part.ID
-and r.programID = prog.ID
-and prog.dept = 'IS'
-and prog.courseNumber = '192';
+drop index progInd;
+
+the new execution plan: 
+
+-----------------------------------------------------------------------------------
+| Id  | Operation             | Name        | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT      |             |     2 |   162 |     3   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS         |             |     2 |   162 |     3   (0)| 00:00:01 |
+|   2 |   MERGE JOIN CARTESIAN|             |    22 |  1210 |     3   (0)| 00:00:01 |
+|*  3 |    INDEX FULL SCAN    | PROGIND     |     1 |    30 |     1   (0)| 00:00:01 |
+|   4 |    BUFFER SORT        |             |    22 |   550 |     2   (0)| 00:00:01 |
+|   5 |     TABLE ACCESS FULL | PARTICIPANT |    22 |   550 |     2   (0)| 00:00:01 |
+|*  6 |   INDEX UNIQUE SCAN   | SYS_C007009 |     1 |    26 |     0   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------
+
+This has the same amount of steps, but the index changed a TABLE ACCESS FULL to a INDEX FULL SCAN. This operation is much more efficient

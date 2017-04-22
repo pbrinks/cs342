@@ -79,6 +79,16 @@ and exists (select * from ProgramParticipant pp2
 -- which I would have preferred to use, but I used a subselect because I needed one for the project
 -- I would also like to create this as a procedure that takes in the Program dept and courseNumber as parameter
 
+-- I optimized this query. The final result:
+create index progInd on Program (ID, dept, courseNumber);
+
+select firstName from Participant part, ProgramParticipant pp1, Program prog
+where pp1.programID = prog.ID
+and prog.dept = 'CS'
+and prog.courseNumber = 333
+and pp1.participantID = part.ID;
+
+
 -- this is a view which shows all students in a semester abroad and what program they are taking part in
 -- along with some basic information about that program
 -- this could be used by the registrar, to see what students are enrolled in what programs
