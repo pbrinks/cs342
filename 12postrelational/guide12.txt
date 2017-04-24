@@ -22,10 +22,26 @@ a.	Chapter 3, “What is Java persistence?”
 		
 	c.	Chapter 5, “Mapping, Round Pegs into Square Holes” — Annotate this Java class for object-relational mapping using Java Annotations with the property access type.
 
+		@Entity
 		public class Solder {
+			@Column(name="NAME")
 			private String name;
+			@Column(name="RANK")
 			private String rank;
+			@Id
+			@Column(name="ID")
 			private long serialNumber;
+			
+			@ManyToOne(fetch=FetchType.LAZY)
+			@JoinColumn(name="COMMANDER_ID")
+			private Solder commander;
+			
+			@ManToMany
+			@Jointable(
+				name="BATTLE"
+				joinColumns=@JoinColumn(name="SOLDER_ID", referencedColumnName="ID"),
+				inverseJoinColumns=@JoinColumn(name="BATTLE_ID", referencedColumnName="ID"))
+			private List<Battle> battles;
 
 			public String getName() { return name; }
 			public void setName(String name) { this.name = name; }
