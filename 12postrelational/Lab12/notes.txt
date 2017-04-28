@@ -1,0 +1,13 @@
+Paige Brinks
+CS 342
+Lab 12
+4/28/2017
+
+Exercise 12.1
+1.	Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish). Do we need both? If so, explain why; if not, explain why not.
+	- JDBC is the connection between IntelliJ and the database. The GlassFish connection is the connection between GlassFish and the client. We therefore need them both, because we need both of these connections.
+
+Exercise 12.2
+1.	How does Intellij map the database tables into Java entity classes?
+2.	What is the PK class do?
+3.	Does Intellij default to field or property annotations?
