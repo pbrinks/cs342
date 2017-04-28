@@ -1,9 +1,6 @@
 package models;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 
 /**
@@ -20,6 +17,7 @@ public class Person {
     private Time birthdate;
     private String householdrole;
     private String homegrouprole;
+    private Household householdID;
 
     @Id
     @Column(name = "ID")
@@ -111,6 +109,12 @@ public class Person {
         this.homegrouprole = homegrouprole;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "HOUSEHOLDID", referencedColumnName = "ID")
+    public Household getHouseholdID() {return householdID; }
+
+    public void setHouseHoldID(Household hhID) { this.householdID = hhID; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,6 +134,8 @@ public class Person {
             return false;
         if (homegrouprole != null ? !homegrouprole.equals(person.homegrouprole) : person.homegrouprole != null)
             return false;
+        if (householdID != null ? !householdID.equals(person.householdID) : person.householdID!= null)
+            return false;
 
         return true;
     }
@@ -145,6 +151,7 @@ public class Person {
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         result = 31 * result + (householdrole != null ? householdrole.hashCode() : 0);
         result = 31 * result + (homegrouprole != null ? homegrouprole.hashCode() : 0);
+        result = 31 * result + (householdID != null ? householdID.hashCode() : 0);
         return result;
     }
 }

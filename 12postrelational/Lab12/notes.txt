@@ -9,5 +9,14 @@ Exercise 12.1
 
 Exercise 12.2
 1.	How does Intellij map the database tables into Java entity classes?
+	It creates a class for every relation, with the attributes of that relation as the instance variables of that class.
+	
 2.	What is the PK class do?
+	Checks that the correct primary keys exist when creating a PersonTeam record and if so, it uses them to map a person to a team.
+
 3.	Does Intellij default to field or property annotations?
+	It uses property annotations because there are accessors for all the instance variables.
+	
+Exercise 12.3
+
+	
