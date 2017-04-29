@@ -5,18 +5,28 @@ Lab 12
 
 Exercise 12.1
 1.	Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish). Do we need both? If so, explain why; if not, explain why not.
-	- JDBC is the connection between IntelliJ and the database. The GlassFish connection is the connection between GlassFish and the client. We therefore need them both, because we need both of these connections.
+	- JDBC is the connection between IntelliJ and the database. The GlassFish connection is the connection between GlassFish and the client. We only actually need the ClassFish connection, but JDBC sets up our development environment.
 
 Exercise 12.2
 1.	How does Intellij map the database tables into Java entity classes?
 	It creates a class for every relation, with the attributes of that relation as the instance variables of that class.
 	
 2.	What is the PK class do?
-	Checks that the correct primary keys exist when creating a PersonTeam record and if so, it uses them to map a person to a team.
+	Checks that the correct primary keys exist when creating a PersonTeam record and if so, it uses them to map a person to a team. It is a class for the derived key of the PersonTeam table (since PersonTeam's primary key is made up of two foreign keys).
 
 3.	Does Intellij default to field or property annotations?
 	It uses property annotations because there are accessors for all the instance variables.
 	
 Exercise 12.3
+1.	Does this application perform marshalling? If so, explain what the marshalling does; if not, explain why it’s not needed.
+	Yes. It transforms the data (relations) in the database into JSON.
 
-	
+2.	Does this code perform any injection? Again, explain…
+	Yes. JPA creates and maintains a managed entity manager with an integrated JTA that we can inject into CPDBResource.
+
+3.	What does the entity manager do in this code, if anything?
+	Allows us to create, remove, update, or delete our Entity classes (Household, Person, PersonTeam, and Team).
+
+Exercise 12.4
+1.	How does JPA return the household and team entities related to a given person?
+	It returns them as JSON objects embedded within the Person record.

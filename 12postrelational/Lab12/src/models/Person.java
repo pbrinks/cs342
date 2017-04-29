@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 /**
  * Created by plb7 on 4/28/2017.
@@ -17,7 +18,8 @@ public class Person {
     private Time birthdate;
     private String householdrole;
     private String homegrouprole;
-    private Household householdID;
+    private Household household;
+    private List<Team> teams;
 
     @Id
     @Column(name = "ID")
@@ -111,9 +113,17 @@ public class Person {
 
     @ManyToOne
     @JoinColumn(name = "HOUSEHOLDID", referencedColumnName = "ID")
-    public Household getHouseholdID() {return householdID; }
+    public Household getHousehold() {return household; }
 
-    public void setHouseHoldID(Household hhID) { this.householdID = hhID; }
+    public void setHousehold(Household hhID) { this.household = hhID; }
+
+    @ManyToMany
+    @JoinTable(name = "PERSONTEAM", schema = "CPDB",
+            joinColumns = @JoinColumn(name = "PERSONID", referencedColumnName = "ID", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "TEAMNAME", referencedColumnName = "NAME", nullable = false))
+    public List<Team> getTeams() { return teams; }
+
+    public void setTeams(List<Team> t) { this.teams = t; }
 
     @Override
     public boolean equals(Object o) {
@@ -134,7 +144,7 @@ public class Person {
             return false;
         if (homegrouprole != null ? !homegrouprole.equals(person.homegrouprole) : person.homegrouprole != null)
             return false;
-        if (householdID != null ? !householdID.equals(person.householdID) : person.householdID!= null)
+        if (household != null ? !household.equals(person.household) : person.household!= null)
             return false;
 
         return true;
@@ -151,7 +161,7 @@ public class Person {
         result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
         result = 31 * result + (householdrole != null ? householdrole.hashCode() : 0);
         result = 31 * result + (homegrouprole != null ? homegrouprole.hashCode() : 0);
-        result = 31 * result + (householdID != null ? householdID.hashCode() : 0);
+        result = 31 * result + (household != null ? household.hashCode() : 0);
         return result;
     }
 }
