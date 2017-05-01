@@ -37,14 +37,28 @@ guide 13
 		-	Since most of the power from the graph databases comes from the relationships and their properties, a lot of thought and design work is needed to model the relationships in the domain that we are trying to work with. Adding new relationship types is easy; changing existing nodes and their relationships is similar to data migration, because these changes will have to be done on each node and each relationship in the existing data.
 
 	f.	when (and when not) to use NoSQL database systems.
+		-	Key-value databases are generally useful for storing session information, user profiles, preferences, shopping cart data. We would avoid using Key-value databases when we need to query by data, have relationships between the data being stored or we need to operate on multiple keys at the same time.
+		-	Document databases are generally useful for content management systems, blogging platforms, web analytics, real-time analytics, ecommerce-applications. We would avoid using document databases for systems that need complex transactions spanning multiple operations or queries against varying aggregate structures.
+		-	Column family databases are generally useful for content management systems, blogging platforms, maintaining counters, expiring usage, heavy write volume such as log aggregation. We would avoid using column family databases for systems that are in early development, changing query patterns.
+		-	Graph databases are very well suited to problem spaces where we have connected data, such as social networks, spatial data, routing information for goods and money, recommendation engines
 
 An alternate source of this basic information is Martin Fowler’s Introduction to NoSQL video.
 
 2.	Use “Getting Started with the Key/Value API”, Chapters 3–5, from the Oracle NoSQL Database documentation as a reference. Be sure to know how to:
 
 	a.	Compare and contrast Major and minor key components.
+		-	Major key is like a primary key, minor key are all other fields
 
 	b.	Use the appropriate commands to write and retrieve records.
+		-	write to the store:
+			1)	Construct a key, making sure to specify all of the key's major and minor path components. For information on major and minor path components, see Record Design Considerations.
+			2)	Construct a value. This is the actual data that you want to put into the store.
+			3)	Use one of the KVStore class's put methods to put the record to the store.
+			
+			commands: kvstore.put(), KVStore.putIfAbsent(), KVStore.putIfPresent(), KVStore.putIfVersion()
+			
+		`-	Retrieve a record:
+			-	To retrieve a record from the store, use the KVStore.get() method. This method returns a ValueVersion object. Use ValueVersion.getValue() to return the Value object associated with the key.
 
 Be sure that you can compare and contrast relational data representations with key-value representations. Note that we will not use these higher-level features: the NoSQL Table API (We’ll focus on the lower-level key/value API); the Avro value schema mechanism (We’ll restrict ourselves to simple string values).
 
