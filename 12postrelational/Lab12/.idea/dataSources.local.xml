@@ -12,5 +12,16 @@
       <introspection-scope>*:CPDB,PUBLIC,SYS,SYSTEM</introspection-scope>
       <resolve-scope>*:CPDB,PUBLIC</resolve-scope>
     </data-source>
+    <data-source name="Oracle - @localhost [2]" uuid="b13f9086-5ce2-4c81-921d-0be14c90d2b5">
+      <database-info product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production" jdbc-version="4.0" driver-name="Oracle JDBC driver" driver-version="12.1.0.2.0">
+        <extra-name-characters>$#</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>cpdb</user-name>
+      <introspection-scope>*:CPDB,PUBLIC,SYS,SYSTEM</introspection-scope>
+      <resolve-scope>*:CPDB,PUBLIC</resolve-scope>
+    </data-source>
   </component>
 </project>

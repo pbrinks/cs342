@@ -9,6 +9,7 @@ import java.util.List;
  */
 @Entity
 public class Person {
+
     private long id;
     private String title;
     private String firstname;
@@ -21,6 +22,8 @@ public class Person {
     private Household household;
     private List<Team> teams;
 
+    @GeneratedValue(generator = "cpdbSequence")
+    @SequenceGenerator(name = "cpdbSequence", sequenceName = "cpdb_sequence", allocationSize = 1)
     @Id
     @Column(name = "ID")
     public long getId() {
