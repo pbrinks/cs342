@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="examples">
+    <CLASSES />
+    <JAVADOC>
+      <root url="file://C:/kv-3.0.9/doc/examples" />
+      <root url="file://C:/kv-3.0.9/doc/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://C:/kv-3.0.9/examples" />
+      <root url="file://C:/kv-3.0.9/src" />
+    </SOURCES>
+  </library>
+</component>

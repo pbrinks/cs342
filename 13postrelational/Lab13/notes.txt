@@ -1,0 +1,22 @@
+Paige Brinks
+CS 342
+Lab 13
+5/5/2017
+
+Exercise 13.1
+a.	Compare and contrast the store.put() command used here for KVLite and the em.persist() command you used for the GlassFish entity manager in the previous lab.
+	store.put() creates a new key value pair record in the store (database) or updates an existing record that already exists with that key.
+	em.persist() cannot update previous records, but only create new ones. em.persist() uses the a mapping between between the relational object and the java object to write to the database, but store.put() can write directly to the database.
+b.	Compare and contrast the store.put() command with the standard Java hashtable’s myHashTable.put() command.
+	Both use key/value mapping, however, store.put() writes to the KVLite store, which is persistent, and myHashTable.put() writes to a hash table which would be stored in main memory.
+	
+Exercise 13.2
+a.	Compare and contrast KVLite keys with relational database keys.
+	In a relational database, a key creates a relationship between tables, i.e. by matching a primary key with another tables foreign key you can query for values from both tables at once. KVLite keys are used to refer back to the value(s) under that key, and therefore cannot get mapped to another table.
+	
+Exercise 13.3
+a.	So far, the implementation has only dealt with records in one relational table, Movie. Explain how a key-value database might implement the one-to-many join relationships commonly implemented in relational databases using foreign keys.
+	As opposed to using foreign keys to create a one-to-many relationship in a relational database, KVLite uses a tree stucture, so one key can map to many values, giving it a one-to-many relationship.
+
+b.	KVLite requires that there be a key, but it is possible to have an “empty” value. Such a value can be created using Value.createValue(new byte[0]). Where might one need such a construct?
+	This could be useful for reversing the directory structure, which would be helpful for many-to-many relationships.
