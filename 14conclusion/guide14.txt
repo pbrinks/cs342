@@ -1,0 +1,26 @@
+Paige Brinks
+Guide 14
+CS 342
+5/9/2017
+
+Work through the following materials this week:
+
+1.	Read Section 30.1:
+	a.	Name and explain the four kinds of control measures required for database security.
+		1) Access Control: Provisions for resticting access to the database system as a whole. This is handled by creating user accounts and passowrds to control the login process by the DBMS.
+		2) Inference Control: Control measures to prevent the ability to infer certain facts concerning individuals from queries on statistical databases.
+		3) Flow Control: Prevents information from flowing in such a way that it reaches unauthorized users.
+		
+		4) Data Encryption: Used to protect sensitive data that is transmitted via some type of communications network, or to provide additional protection for sensitive portions of a database.
+
+	b.	Compare and contrast information security and information privacy.
+		- Security: How well a system can protect access to information it contains.
+		- Privacy: The ability of individuals to control the terms under which their personal information is acquired and used.
+
+2.	Read Imperva’s Top 5 Database Security Threats.
+	a.	Name and explain the security threats discussed in the article.
+		1) Excessive, inappropriate, and unused priveleges: When you grant someone database privileges that exceed the requirements of their job function, these privileges can be abused. 
+		2) Privelege abuse: Imperva research that includes data from  multiple organizations over a two-year period indicates that in every organization humans used database service accounts to access databases, and that these users were misusing these privileged service accounts to access sensitive data directly, bypassing the application interface. In addition, certain “Privileged Users” may abuse legitimate database privileges for unauthorized purposes. Certain user groups in the organization have privileges to access entire databases due to their occupation and activities. 
+		3) Insufficient web application security:  Two common types of web application attacks that target databases are SQL Injection and Web Shell. 
+		4) Weak audit trails: Caused by insufficient internal processes or gaps. Monitoring data access across the enterprise should be part of any production database deployment. The failure to monitor for both security and compliance anomalies and collect the appropriate audit details of database activity represents a serious organizational risk at many levels.
+		5) Unsecured storage media:  Numerous security breaches have involved the theft or incidental exposure of database backup disks and tapes. Taking the appropriate measures to protect backup copies of sensitive data is not only a data security best practice, but also mandated by many regulations.
