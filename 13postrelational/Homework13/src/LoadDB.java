@@ -86,16 +86,18 @@ public class LoadDB {
         }
 
         // read in Role
+        String roleNum = "";
         ResultSet roleResultSet = jdbcStatement.executeQuery("SELECT actorID, movieID, role FROM Role");
         while (roleResultSet.next()) {
             // role/actorID/movieID/-/role
-            Key roleKey = Key.createKey(Arrays.asList("role", roleResultSet.getString(1), roleResultSet.getString(2)), Arrays.asList("role"));
+            Key roleKey = Key.createKey(Arrays.asList("role", roleResultSet.getString(2), roleResultSet.getString(1)),
+                                                        Arrays.asList(roleResultSet.getString(3)));
+
             Value roleValue = Value.createValue(roleResultSet.getString(3).getBytes());
             store.put(roleKey, roleValue);
 
-//            String roleResult = new String(store.get(roleKey).getValue().getValue());
-//            System.out.println(roleKey.toString() + " : " + roleResult);
-
+            String roleResult = new String(store.get(roleKey).getValue().getValue());
+            System.out.println(roleKey.toString() + " : " + roleResult);
         }
 
         movieResultSet.close();

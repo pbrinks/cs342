@@ -21,9 +21,17 @@ public class GetMovieActorRoles {
         String movieID = "92616";
 
         Key roleMajorKeyPathOnly = Key.createKey(Arrays.asList("role", actorID, movieID));
-        Key actorMajorKeyPathOnly = Key.createKey(Arrays.asList("actor", actorID));
-        Key movieMajorKeyPathOnly = Key.createKey(Arrays.asList("movie", movieID));
-        
+//        Key actorMajorKeyPathOnly = Key.createKey(Arrays.asList("actor", actorID));
+//        Key movieMajorKeyPathOnly = Key.createKey(Arrays.asList("movie", movieID));
+
+
+        Map<Key, ValueVersion> fields = store.multiGet(roleMajorKeyPathOnly, null, null);
+        for (Map.Entry<Key, ValueVersion> field : fields.entrySet()) {
+            String fieldValue = new String(field.getValue().getValue().getValue());
+            System.out.println(fieldValue);
+
+
+        }
 
 
         store.close();
