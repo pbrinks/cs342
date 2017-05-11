@@ -5,7 +5,7 @@ Lab 12
 
 Exercise 12.1
 1.	Compare and contrast the database connection you built in Guide 12 (in Intellij IDEA) and this database connection (in GlassFish). Do we need both? If so, explain why; if not, explain why not.
-	- JDBC is the connection between IntelliJ and the database. The GlassFish connection is the connection between GlassFish and the client. We only actually need the ClassFish connection, but JDBC sets up our development environment.
+	- JDBC is the connection between IntelliJ and the database. The GlassFish connection is the connection between GlassFish and the client. We only actually need the ClassFish connection, but IDEA sets up our development environment.
 
 Exercise 12.2
 1.	How does Intellij map the database tables into Java entity classes?
