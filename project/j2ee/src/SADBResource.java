@@ -35,18 +35,6 @@ public class SADBResource {
     private EntityManager em;
 
     /**
-     * GET a default message.
-     *
-     * @return a static hello-world message
-     */
-    @GET
-    @Path("/hello")
-    @Produces("text/plain")
-    public String getClichedMessage() {
-        return "Hello, JPA!";
-    }
-
-    /**
      * GET an individual Program record.
      * useful for registrar/off-campus programs to look up info on a specific program
      *
