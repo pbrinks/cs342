@@ -88,6 +88,7 @@ and prog.dept = 'CS'
 and prog.courseNumber = 333
 and r1.participantID = part.ID;
 
+drop index progInd;
 
 -- this is a view which shows all students in a semester abroad and what program they are taking part in
 -- along with some basic information about that program

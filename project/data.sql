@@ -120,6 +120,17 @@ INSERT INTO Review VALUES (15,16,'dignissim tempor arcu. Vestibulum ut eros non 
 INSERT INTO Review VALUES (21,1,'It was great!',5);
 INSERT INTO Review VALUES (19,1,'10/10 would recommend.',5);
 INSERT INTO Review VALUES (7,1,'It sucked',1);
+INSERT INTO Review VALUES (8,15,null,null);
+INSERT INTO Review VALUES (9,16,null,null);
+INSERT INTO Review VALUES (10,17,null,null);
+INSERT INTO Review VALUES (11,18,null,null);
+INSERT INTO Review VALUES (12,19,null,null);
+INSERT INTO Review VALUES (13,1,null,null);
+INSERT INTO Review VALUES (14,1,null,null);
+INSERT INTO Review VALUES (15,1,null,null);
+INSERT INTO Review VALUES (16,1,null,null);
+INSERT INTO Review VALUES (17,1,null,null);
+
 
 INSERT INTO Trip VALUES (tripSequence.nextval,1,'nisi','1 hr','17.03','eget nisi dictum augue malesuada malesuada. Integer id magna et');
 INSERT INTO Trip VALUES (tripSequence.nextval,1,'Proin','all day.','2.88','lacus. Nulla tincidunt, neque vitae semper egestas, urna justo faucibus');
