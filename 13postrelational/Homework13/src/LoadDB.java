@@ -72,7 +72,6 @@ public class LoadDB {
         }
 
         // read in Role
-        String roleNum = "";
         ResultSet roleResultSet = jdbcStatement.executeQuery("SELECT actorID, movieID, role FROM Role");
         while (roleResultSet.next()) {
             // role/actorID/movieID/-/roleName
@@ -84,6 +83,8 @@ public class LoadDB {
             store.put(roleKey, roleValue);
         }
 
+        roleResultSet.close();
+        actorResultSet.close();
         movieResultSet.close();
         jdbcStatement.close();
         jdbcConnection.close();

@@ -9,8 +9,8 @@
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>sadb</user-name>
-      <introspection-scope>*:SADB,PUBLIC,SYS,SYSTEM</introspection-scope>
-      <resolve-scope>*:SADB,PUBLIC</resolve-scope>
+      <introspection-scope>*:PUBLIC,SADB,SYS,SYSTEM</introspection-scope>
+      <resolve-scope>*:PUBLIC,SADB</resolve-scope>
     </data-source>
   </component>
 </project>

@@ -1,5 +1,4 @@
 import oracle.kv.*;
-import oracle.kv.impl.api.ops.Get;
 
 import java.sql.SQLException;
 import java.util.Arrays;
