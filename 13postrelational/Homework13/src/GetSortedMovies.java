@@ -49,5 +49,7 @@ public class GetSortedMovies {
         for(int i = 0; i < movies.size(); i++) {
             System.out.println(movies.get(i).getYear() + '\t' + movies.get(i).getID() + '\t' + movies.get(i).getName());
         }
+
+        store.close();
     }
 }

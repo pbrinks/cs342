@@ -44,5 +44,7 @@ public class GetMovieActors {
 
             System.out.println(actorIDs.get(i) + '\t' + firstnameResult + " " + lastnameResult + '\t' + roles.get(i));
         }
+
+        store.close();
     }
 }

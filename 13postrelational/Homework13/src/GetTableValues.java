@@ -24,6 +24,7 @@ public class GetTableValues {
             String fieldValue = new String(field.getValue().getValue().getValue());
             System.out.println(fieldValue);
         }
+
         store.close();
     }
 }
