@@ -18,6 +18,7 @@ public class GetTableValues {
     public void run() {
         KVStore store = KVStoreFactory.getStore(new KVStoreConfig("kvstore", "localhost:5000"));
 
+        // return all details about Movie 92616
         Key majorKeyPathOnly = Key.createKey(Arrays.asList("movie", "92616"));
         Map<Key, ValueVersion> fields = store.multiGet(majorKeyPathOnly, null, null);
         for (Map.Entry<Key, ValueVersion> field : fields.entrySet()) {

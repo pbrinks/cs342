@@ -10,11 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * This program used JDBC to query all the movies from the IMDB Movies table.
- * Include ojdbc6.jar (from the J2EE library) in the system path to support the JDBC functions.
+ * This program converts the imdb relational database records into a KVLite store
  *
- * @author kvlinden
- * @version Spring, 2015
+ * @author Paige Brinks, plb7
+ * @version 5/12/2017
  */
 public class LoadDB {
 
@@ -27,6 +26,8 @@ public class LoadDB {
         // read in Movie
         ResultSet movieResultSet = jdbcStatement.executeQuery("SELECT id, name, year, rank FROM Movie");
         while (movieResultSet.next()) {
+            // the order of which I stored Movie values is useful for when I iterate through the major keys beginning with
+            //  movie in GetSortedMovies
             // movie/id/-/name
             Key nameKey = Key.createKey(Arrays.asList("movie", movieResultSet.getString(1)), Arrays.asList("name"));
             Value nameValue = Value.createValue(movieResultSet.getString(2).getBytes());
@@ -47,17 +48,10 @@ public class LoadDB {
                 store.put(rankKey, rankValue);
             }
 
-//            String nameResult = new String(store.get(nameKey).getValue().getValue());
-//            String yearResult = new String(store.get(yearKey).getValue().getValue());
-//            String rankResult = new String(store.get(rankKey).getValue().getValue());
-//
-//            System.out.println(nameKey.toString() + " : " + nameResult);
-//            System.out.println(yearKey.toString() + " : " + yearResult);
-//            System.out.println(rankKey.toString() + " : " + rankResult);
-
         }
 
         // read in Actor
+        // I use actor/id/-/firstname and actor/id/-/lastname in GetMovieActors
         ResultSet actorResultSet = jdbcStatement.executeQuery("SELECT id, firstname, lastname, gender FROM Actor");
         while (actorResultSet.next()) {
             // actor/id/-/firstname
@@ -75,29 +69,19 @@ public class LoadDB {
             Value genderValue= Value.createValue(actorResultSet.getString(4).getBytes());
             store.put(genderKey, genderValue);
 
-//            String firstnameResult = new String(store.get(firstnameKey).getValue().getValue());
-//            String lastnameResult = new String(store.get(lastnameKey).getValue().getValue());
-//            String genderResult = new String(store.get(genderKey).getValue().getValue());
-//
-//            System.out.println(firstnameKey.toString() + " : " + firstnameResult);
-//            System.out.println(lastnameKey.toString() + " : " + lastnameResult);
-//            System.out.println(genderKey.toString() + " : " + genderResult);
-
         }
 
         // read in Role
         String roleNum = "";
         ResultSet roleResultSet = jdbcStatement.executeQuery("SELECT actorID, movieID, role FROM Role");
         while (roleResultSet.next()) {
-            // role/actorID/movieID/-/role
+            // role/actorID/movieID/-/roleName
+            // this supports GetMovieActorRoles, by storing the roleName as a minor key I am able to query for actors who
+            // played more than one role in the same movie
             Key roleKey = Key.createKey(Arrays.asList("role", roleResultSet.getString(2), roleResultSet.getString(1)),
                                                         Arrays.asList(roleResultSet.getString(3)));
-
             Value roleValue = Value.createValue(roleResultSet.getString(3).getBytes());
             store.put(roleKey, roleValue);
-
-            String roleResult = new String(store.get(roleKey).getValue().getValue());
-            System.out.println(roleKey.toString() + " : " + roleResult);
         }
 
         movieResultSet.close();
@@ -105,7 +89,5 @@ public class LoadDB {
         jdbcConnection.close();
         store.close();
     }
-
-
 
 }

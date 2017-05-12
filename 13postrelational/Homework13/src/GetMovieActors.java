@@ -19,16 +19,15 @@ public class GetMovieActors {
         KVStore store = KVStoreFactory.getStore(new KVStoreConfig("kvstore", "localhost:5000"));
 
         String movieID = "92616";
-
+        // create Key to iterate through
         ArrayList<String> majorcompenents = new ArrayList<String>();
-
         majorcompenents.add("role");
         majorcompenents.add(movieID);
-        Key myKey = Key.createKey(majorcompenents);
-
+        Key key = Key.createKey(majorcompenents);
+        // store actor names and roles to print out
         ArrayList<String> actorIDs = new ArrayList<String>();
         ArrayList<String> roles = new ArrayList<String>();
-        Iterator<KeyValueVersion> iterator = store.storeIterator(Direction.UNORDERED, 0, myKey, null, null);
+        Iterator<KeyValueVersion> iterator = store.storeIterator(Direction.UNORDERED, 0, key, null, null);
         while (iterator.hasNext()) {
             Key tempKey = iterator.next().getKey();
             String aID = tempKey.getMajorPath().get(2);
@@ -37,11 +36,10 @@ public class GetMovieActors {
             roles.add(r);
         }
 
+        // print out results
         for (int i = 0; i < actorIDs.size(); i++) {
-
             Key firstnameKey = Key.createKey(Arrays.asList("actor", actorIDs.get(i)), Arrays.asList("firstname"));
             Key lastnameKey = Key.createKey(Arrays.asList("actor", actorIDs.get(i)), Arrays.asList("lastname"));
-
             String firstnameResult = new String(store.get(firstnameKey).getValue().getValue());
             String lastnameResult = new String(store.get(lastnameKey).getValue().getValue());
 

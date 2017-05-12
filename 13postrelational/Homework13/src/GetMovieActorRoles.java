@@ -2,6 +2,7 @@ import oracle.kv.*;
 
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -20,19 +21,14 @@ public class GetMovieActorRoles {
         String actorID = "429719";
         String movieID = "92616";
 
-        Key roleMajorKeyPathOnly = Key.createKey(Arrays.asList("role", actorID, movieID));
-//        Key actorMajorKeyPathOnly = Key.createKey(Arrays.asList("actor", actorID));
-//        Key movieMajorKeyPathOnly = Key.createKey(Arrays.asList("movie", movieID));
+        Key roleMajorKeyPathOnly = Key.createKey(Arrays.asList("role", movieID, actorID));
 
-
+        // return all roles played by actor 429719 in movie 92616
         Map<Key, ValueVersion> fields = store.multiGet(roleMajorKeyPathOnly, null, null);
         for (Map.Entry<Key, ValueVersion> field : fields.entrySet()) {
             String fieldValue = new String(field.getValue().getValue().getValue());
             System.out.println(fieldValue);
-
-
         }
-
 
         store.close();
     }

@@ -1,0 +1,16 @@
+Paige Brinks
+cs 342
+Homework 13
+5/11/2017
+
+a.	What type of noSQL database system is Oracle’s NoSQL product, KVLite?
+	-	Key-Value Store
+	
+b.	The Internet Movie DataBase (imdb.com) is currently implemented in mySQL. If you were required to port it to a noSQL system, which of the noSQL system types would you suggest? Explain your answer.
+	-	I would use a Graph database because those are best for connected data, the other three types are not very good for querying, which if someone wanted to look up all actors in a certain movie, they would have to query for it. With a graph there is a two way relationship - if you can find an actor from a movie, you could also find a movie from that actor. You would just need to follow the edge between them. In KVLite we can find actors in movies, using our role major key paths, however to find movies from actors we would need to define a new major key path for them (see explanation in question c).
+	
+c.	Could you (efficiently) reuse the same key-value structure for exercise 13.1.d (above) and its “opposite”, i.e., get the movies in which a given actor is cast? Why or why not?
+	-	No, because in order to iterate through the key-value pairs, we need at least part of the major key, but we cannot have a gap in the key: my key is organized role/movieID/actorID, in order to find the actors in a movie, I iterated through all keys beginning with role/movieID, this would not work to find role/<unknown>/actorID. In order to achieve this I would need to create new key-value pairs organized as role/actorID/movieID.
+
+d.	NoSQL databases are often referred to as schema-less or schema-free. Explain what this means using examples from your homework solution.
+	-	Schemas are very strict with a lot of constraints: every instance of a relation must have the same fields and follow the same rules. They are also strongly-typed. However, with KVLite, I could essentially make any key path I wanted. I could make a movie that has an extra value that no other movies have: for example making a minor keypath of "review" for a movie, so instead of the major key path of movie/id/ I would have movie/id/review. This would not really makes sense, but it is doable and there would only be one movie with a review associated with it. Also, keys act as pointers to the values, therefore, I cannot easily check if a value is null, like I could in SQL, because if I try and get the value being pointed to by a key that is null, it will give me a null pointer exception. For this reason, I just stored the string "null" for the ranks of movies that do not have ranks. Also, values are stored as bytes, meaning my type doesn't matter, because everytime I create my value as a string that I convert to bytes. 
