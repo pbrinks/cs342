@@ -6,9 +6,9 @@ DECLARE
 	invalidReview EXCEPTION;
 BEGIN
 	SELECT COUNT(*) INTO ppCounter 
-	FROM ProgramParticipant pp
-	WHERE pp.programID = :new.programID
-	AND pp.participantID = :new.participantID;
+	FROM Review r
+	WHERE r.programID = :new.programID
+	AND r.participantID = :new.participantID;
 	
 	IF ppCounter < 1 THEN
 		raise invalidReview;

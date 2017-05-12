@@ -46,20 +46,12 @@ create table Participant (
 	FOREIGN KEY (grade) REFERENCES GradeLevel(grade) ON DELETE SET NULL
 	);
 	
-create table ProgramParticipant (
-	programID integer,
-	participantID integer,
-	PRIMARY KEY (programID, participantID),
-	FOREIGN KEY (programID) REFERENCES Program(id) ON DELETE CASCADE,
-	FOREIGN KEY (participantID) REFERENCES Participant(id) ON DELETE CASCADE
-	);
-	
 create table Review (
-	id integer PRIMARY KEY,
 	participantID integer,
 	programID integer,
 	text varchar(200),
 	rating integer CHECK (rating <= 5),
+	PRIMARY KEY (participantID, programID),
 	FOREIGN KEY (participantID) REFERENCES Participant(id) ON DELETE CASCADE,
 	FOREIGN KEY (programID) REFERENCES Program(id) ON DELETE CASCADE
 	);
@@ -87,9 +79,13 @@ create table TripAttraction (
 	attractionID integer,
 	visit_date date,
 	PRIMARY KEY (tripID, attractionID, visit_date),
-	FOREIGN KEY (tripID) REFERENCES Trip(id) ON DELETE SET NULL,
-	FOREIGN KEY (attractionID) REFERENCES Attraction(id) ON DELETE SET NULL
+	FOREIGN KEY (tripID) REFERENCES Trip(id) ON DELETE CASCADE,
+	FOREIGN KEY (attractionID) REFERENCES Attraction(id) ON DELETE CASCADE
 	);
-	
 
-	
+-- sequences	
+CREATE SEQUENCE professorSequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE programSequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE participantSequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE tripSequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE attractionSequence START WITH 1 INCREMENT BY 1;

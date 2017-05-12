@@ -33,9 +33,9 @@ and prog.courseNumber = '192';
 -- query of the count of all the Participants who are currently registered for each semester abroad
 -- this would be useful for the professors to reference who are planning the semester and for the 
 -- registrar to look up participant counts
-select prog.dept, prog.courseNumber, count(pp.participantID)
-from Program prog LEFT OUTER JOIN ProgramParticipant pp
-ON pp.programID =  prog.ID
+select prog.dept, prog.courseNumber, count(r.participantID)
+from Program prog LEFT OUTER JOIN Review r
+ON r.programID =  prog.ID
 group by prog.dept, prog.courseNumber;
 -- I would not implement this another way
 
@@ -60,18 +60,18 @@ where cost IS NULL;
 				
 -- This finds all students in one program, this would be useful for a student trying to see what other 
 -- students will be going abroad with them (like class pictures)
--- can switch out program dept and coursenumber to look up other programs				
-select firstName from Participant part, ProgramParticipant pp1, Program prog
-where pp1.programID = prog.ID
+-- can switch out program dept and coursenumber to look up other programs
+select firstName from Participant part, Review r1, Program prog
+where r1.programID = prog.ID
 and prog.dept = 'CS'
 and prog.courseNumber = 333
-and pp1.participantID = part.ID
-and exists (select * from ProgramParticipant pp2
-			where pp2.programID = pp1.programID
-			and pp2.participantID <> part.ID
+and r1.participantID = part.ID
+and exists (select * from Review r2
+			where r2.programID = r1.programID
+			and r1.participantID <> part.ID
 			);
 -- this query is actually possible in a much simpler way:
--- select firstName from Participant part, ProgramParticipant pp1, Program prog
+-- select firstName from Participant part, Review r1, Program prog
 -- where pp1.programID = prog.ID
 -- and prog.dept = 'CS'
 -- and prog.courseNumber = 333
@@ -82,11 +82,11 @@ and exists (select * from ProgramParticipant pp2
 -- I optimized this query. The final result:
 create index progInd on Program (ID, dept, courseNumber);
 
-select firstName from Participant part, ProgramParticipant pp1, Program prog
-where pp1.programID = prog.ID
+select firstName from Participant part, Review r1, Program prog
+where r1.programID = prog.ID
 and prog.dept = 'CS'
 and prog.courseNumber = 333
-and pp1.participantID = part.ID;
+and r1.participantID = part.ID;
 
 
 -- this is a view which shows all students in a semester abroad and what program they are taking part in
@@ -100,9 +100,9 @@ select part.firstName || ' ' || part.lastName as student,
 		prof.firstName || ' ' || prof.lastName as professor, 
 		prog.city || ', ' || prog.country as location,
 		prog.semester
-from Participant part, Program prog, ProgramParticipant pp, Professor prof
+from Participant part, Program prog, Review r, Professor prof
 where prog.professorID = prof.ID
-and pp.programID = prog.ID
-and pp.participantID = part.ID;
+and r.programID = prog.ID
+and r.participantID = part.ID;
 -- I used a non-materialized view because the registrar would always want a current version
 -- of what student is enrolled in what

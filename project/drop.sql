@@ -1,12 +1,16 @@
-DROP reviewTrigger;
+DROP TRIGGER reviewTrigger;
 DROP PROCEDURE addTrip;
+
+DROP SEQUENCE professorSequence;
+DROP SEQUENCE programSequence;
+DROP SEQUENCE participantSequence;
 DROP SEQUENCE tripSequence;
+DROP SEQUENCE attractionSequence;
 
 DROP TABLE TripAttraction;
 DROP TABLE Attraction;
 DROP TABLE Trip;
 DROP TABLE Review;
-DROP TABLE ProgramParticipant;
 DROP TABLE Participant;
 DROP TABLE Program;
 DROP TABLE Professor;

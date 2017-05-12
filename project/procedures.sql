@@ -1,8 +1,4 @@
 
--- create trip sequence
-CREATE SEQUENCE tripSequence 
-	START WITH 20
-	INCREMENT BY 1;
 
 -- this creates an Trip and then automatically adds the cost
 -- of that trip to the total cost of the program that trip is associated with
