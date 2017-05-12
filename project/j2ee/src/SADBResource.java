@@ -50,7 +50,7 @@ public class SADBResource {
 
 
     /**
-     * GET all Progrmas using the criteria query API.
+     * GET all Programs using the criteria query API.
      * This would be useful to off-campus programs to be able to look up all current abroad programs
      * @return a list of all Program records
      */
