@@ -1,5 +1,6 @@
 DROP TRIGGER reviewTrigger;
 DROP PROCEDURE addTrip;
+DROP VIEW part_progs;
 
 DROP SEQUENCE professorSequence;
 DROP SEQUENCE programSequence;

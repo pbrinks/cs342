@@ -39,6 +39,7 @@ ON r.programID =  prog.ID
 group by prog.dept, prog.courseNumber;
 -- I would not implement this another way
 
+
 -- This table gives all of the attractions visited during a trip during the semester abraod
 -- couse  CS 333. This query is useful because by switching out the dept, courseNumber and date, 
 -- the professor leading the program can see which attractions they will be visiting during which trips
@@ -52,12 +53,14 @@ and t.programID = p.ID
 and ta.tripID = t.ID
 and ta.attractionID = a.ID;
 
+
 -- This recieves all semester abroad programs where the cost is null (meaning the cost is not yet known) 
 -- This would be useful for financial services to figure out what
 -- programs still need to have their budget finalized
 select prog.dept, prog.courseNumber from Program prog
 where cost IS NULL;
-				
+		
+		
 -- This finds all students in one program, this would be useful for a student trying to see what other 
 -- students will be going abroad with them (like class pictures)
 -- can switch out program dept and coursenumber to look up other programs
@@ -79,7 +82,7 @@ and exists (select * from Review r2
 -- which I would have preferred to use, but I used a subselect because I needed one for the project
 -- I would also like to create this as a procedure that takes in the Program dept and courseNumber as parameter
 
--- I optimized this query. The final result:
+-- See optimizations.txt: I optimized this query. The final result:
 create index progInd on Program (ID, dept, courseNumber);
 
 select firstName from Participant part, Review r1, Program prog
@@ -90,10 +93,24 @@ and r1.participantID = part.ID;
 
 drop index progInd;
 
+
+-- added query with combination of inner and outer join
+-- selects all students, whether they are enrolled in a program or not. 
+-- if they are enrolled in a program show that program 
+-- this is useful for looking up all students and figuring out what programs they are in, 
+-- if they are enrolled in multiple programs, or if they are enrolled in no programs.  
+
+select part.firstName || ' ' || part.lastName as participant, prog.dept || ' ' || prog.courseNumber
+from Participant part LEFT OUTER JOIN (
+	Program prog INNER JOIN Review r 
+	ON prog.id = r.programID)
+ON part.id = r.participantID
+order by part.lastName, part.firstName;
+
+
 -- this is a view which shows all students in a semester abroad and what program they are taking part in
 -- along with some basic information about that program
 -- this could be used by the registrar, to see what students are enrolled in what programs
-drop view part_progs;
 
 create view part_progs as
 select part.firstName || ' ' || part.lastName as student, 
@@ -107,3 +124,5 @@ and r.programID = prog.ID
 and r.participantID = part.ID;
 -- I used a non-materialized view because the registrar would always want a current version
 -- of what student is enrolled in what
+
+
