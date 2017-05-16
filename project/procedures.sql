@@ -1,4 +1,4 @@
--- this procedure creates an Trip and then automatically adds the cost
+-- this procedure creates a Trip and then automatically adds the cost
 -- of that trip to the total cost of the program that trip is associated with
 -- this is useful for the professor, because when planning a program abroad
 -- everytime the plan another mandatory trip (ie weekend trip, day trip) they 
@@ -91,3 +91,8 @@ and courseNumber = 333;
 
 select * from Trip
 where id = (select max(id) from Trip);
+
+
+
+
+-- create procedure to update a review

@@ -1,13 +1,13 @@
 -- insert data into StudyAbroad database
+INSERT INTO SemesterCode VALUES ('F');
+INSERT INTO SemesterCode VALUES ('S');
+INSERT INTO SemesterCode VALUES ('I');
+
 INSERT INTO GradeLevel VALUES ('Freshman');
 INSERT INTO GradeLevel VALUES ('Sophomore');
 INSERT INTO GradeLevel VALUES ('Junior');
 INSERT INTO GradeLevel VALUES ('Senior');
 INSERT INTO GradeLevel VALUES ('Other');
-
-INSERT INTO SemesterCode VALUES ('F');
-INSERT INTO SemesterCode VALUES ('S');
-INSERT INTO SemesterCode VALUES ('I');
 
 INSERT INTO Department VALUES ('CS', 'Computer Science');
 INSERT INTO Department VALUES ('IS', 'Information Systems');

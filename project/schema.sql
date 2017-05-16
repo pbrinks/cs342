@@ -25,14 +25,15 @@ create table Program (
 	dept varchar(4),
 	courseNumber integer,
 	professorID integer,
-	semester char(1) CHECK ( semester IN ('F', 'S', 'I')),
+	semester char(1),
 	country varchar(50),
 	city varchar(50),
 	cost float,
 	description varchar(200),
 	capacity integer,
 	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL,
-	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL
+	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL,
+	FOREIGN KEY (semester) REFERENCES SemesterCode(semester) ON DELETE CASCADE
 	);
 		
 create table Participant (
