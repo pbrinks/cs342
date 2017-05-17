@@ -3,9 +3,26 @@ CS 342
 Project Vision
 02/10/2017
 
-For my project I would like to make a vacation or trip database. It would contain the following tables: Continent, Country, City, Attraction, Hotel, Restaurant, PublicTransport, and Trip. The stakeholders for my project would be someone planning a vacation, travel agencies, someone who wants to find more fun things to do in their own city, and any businesses contained in my databse (attractions, hotels, public transport, etc.). 
+Vision (original):
+-	For my project I would like to make a vacation or trip database. It would contain the following tables: Continent, Country, City, Attraction, Hotel, Restaurant, PublicTransport, and Trip. The stakeholders for my project would be someone planning a vacation, travel agencies, someone who wants to find more fun things to do in their own city, and any businesses contained in my databse (attractions, hotels, public transport, etc.). 
 
-Updated vision:
-In order to make this more unique and have a more specific client base, I will be specifically doing semester abroad programs offered by Calvin, specifying in the tables which semester (F, S, or I) the abroad program takes place in, along with specific attractions the students go to see in that semester, and also a rate field which displays how students who have taken this semester abroad before enjoyed it. With this my client base will be students interested in a particular semester abroad, professors who can get feedback on students experiences abroad, and students who have already taken the semester and can give feedback.
+Updated vision (based on comments from Project 1 deliverable (Vision):
+-	In order to make this more unique and have a more specific client base, I will be specifically doing semester abroad programs offered by Calvin, specifying in the tables which semester (F, S, or I) the abroad program takes place in, along with specific attractions the students go to see in that semester, and also a rate field which displays how students who have taken this semester abroad before enjoyed it. With this my client base will be students interested in a particular semester abroad, professors who can get feedback on students experiences abroad, and students who have already taken the semester and can give feedback.
 
-Based on my discussion with Professor Vander Linden, I have removed the ProgramParticipant table, and replaced all of its uses with the Review table. This is because the ProgramPartipant table only contained the foreign keys of programID and participantId, both of which are included in Review. Therefore it would be redundant to use both tables. I now use the Review table, to relate Participants to any Program they are enrolled in.
+Updates based on comments from Project 2 deliverable (Design):
+-	Based on my discussion with Professor Vander Linden, I have removed the ProgramParticipant table, and replaced all of its uses with the Review table. This is because the ProgramPartipant table only contained the foreign keys of programID and participantId, both of which are included in Review. Therefore it would be redundant to use both tables. I now use the Review table, to relate Participants to any Program they are enrolled in.
+-	I also removed any CHECK contstraints and replaced them with foreign keys referring back to legal value tables.
+-	Updated ERD to match these changes
+-	Added lsiting of key's for my BCNF/4NF proofs
+-	Justified the normal form I used
+
+Updates based on comments from Project 3 deliverable (Queries):
+-	 Added a table with an inner/outer join combination
+
+Updates based on comments from Project 4 deliverable (Application):
+-	Added locking, commit, and rollback to my procedure
+
+Updates based on comments from Project 5 deliverable (Extensions):
+-	Updated my GetSortedParticipants to use a multi-get to sort, instead of manually sorting each record
+-	Added documentation of my key structure at the beginning of my LoadDB.java file
+-	Removed my lib/ directory from GitHub
