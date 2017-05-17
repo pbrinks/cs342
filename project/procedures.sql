@@ -12,47 +12,53 @@ CREATE OR REPLACE PROCEDURE addTrip(
 									p_description Trip.description%type
 									)
 AS
-
-CURSOR c1
-IS 
-	SELECT cost
-	FROM Program
-	WHERE id = p_programID
-	FOR UPDATE;
 	
 v_cost Trip.totalCost%type;
 pcount integer;
+totalTripCost integer;
 
 invalidAmount EXCEPTION;
 invalidProgram EXCEPTION;
+invalidProgramCost EXCEPTION;
+
 BEGIN
 	SAVEPOINT sp;
+	
+	SELECT cost into v_cost
+		FROM Program
+		WHERE id = p_programID
+		FOR UPDATE;
+
+	LOCK TABLE Trip IN EXCLUSIVE MODE;
+	SELECT SUM(totalCost) INTO totalTripCost
+		FROM Trip
+		WHERE programID = p_programID;
 	
 	-- cost cannot be negative
 	IF p_totalCost < 0 THEN
 		raise invalidAmount;
 	END IF;
 	
-	OPEN c1;
-		FETCH c1 INTO v_cost;
+	-- check that program exists
+	SELECT count(*) INTO pcount
+	FROM Program p
+	WHERE p.id = p_programID;
 	
-		-- check that program exists
-		SELECT count(*) INTO pcount
-		FROM Program p
-		WHERE p.id = p_programID;
-		
-		IF pcount < 1 THEN
-			raise invalidProgram;
-		END IF;
-		
-		INSERT INTO Trip
-		VALUES (tripSequence.nextval, p_programID, p_location, p_timeLength, p_totalCost, p_description);
-		
-		UPDATE Program
-		SET cost = (v_cost + p_totalCost)
-		WHERE ID = p_programID;
-		
-	CLOSE c1;
+	IF pcount < 1 THEN
+		raise invalidProgram;
+	END IF;
+	
+	-- the total amount of all trip for that program cannot be greater
+	-- total cost of the program
+	IF totalTripCost > v_cost THEN
+		raise invalidProgramCost;
+	END IF;
+	
+	INSERT INTO Trip VALUES (tripSequence.nextval, p_programID, p_location, p_timeLength, p_totalCost, p_description);
+	
+	UPDATE Program
+	SET cost = (v_cost + p_totalCost)
+	WHERE ID = p_programID;
 	
 	COMMIT;
 
@@ -61,14 +67,18 @@ EXCEPTION
 		raise_application_error (-20001,'Cost must be nonnegative.');
 		ROLLBACK TO sp;
 	WHEN invalidProgram	THEN
-		raise_application_error(-20003, 'Program does not exist.');
+		raise_application_error(-20002, 'Program does not exist.');
+		ROLLBACK TO sp;
+	WHEN invalidProgramCost THEN
+		raise_application_error(-20003, 'Program cost is less than total cost for trips!');
 		ROLLBACK TO sp;
 	WHEN OTHERS THEN
-		raise_application_error(-20003, 'Invalid transaction!');
+		raise_application_error(-20004, 'Invalid transaction!');
 		ROLLBACK TO sp;
 END;
 /
 
+SHOW ERRORS;
 -- tests
 
 select cost from Program
@@ -92,7 +102,3 @@ and courseNumber = 333;
 select * from Trip
 where id = (select max(id) from Trip);
 
-
-
-
--- create procedure to update a review
