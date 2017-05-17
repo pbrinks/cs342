@@ -47,20 +47,15 @@ public class LoadDB {
             store.put(countryKey, countryValue);
         }
 
-        ResultSet participantResultSet = jdbcStatement.executeQuery("SELECT id, firstname, lastname, grade FROM Participant");
+        ResultSet participantResultSet = jdbcStatement.executeQuery("SELECT id, firstname, lastname FROM Participant");
         while (participantResultSet.next()) {
-            // participant/id/-/firstname
-            Key fnameKey = Key.createKey(Arrays.asList("participant", participantResultSet.getString(1)), Arrays.asList("firstname"));
-            Value fnameValue = Value.createValue(participantResultSet.getString(2).getBytes());
-            store.put(fnameKey, fnameValue);
-            // participant/id/-/lastname
-            Key lnameKey = Key.createKey(Arrays.asList("participant", participantResultSet.getString(1)), Arrays.asList("lastname"));
-            Value lnameValue = Value.createValue(participantResultSet.getString(3).getBytes());
-            store.put(lnameKey, lnameValue);
-            // participant/id/-/grade
-            Key gradeKey = Key.createKey(Arrays.asList("participant", participantResultSet.getString(1)), Arrays.asList("grade"));
-            Value gradeValue = Value.createValue(participantResultSet.getString(4).getBytes());
-            store.put(gradeKey, gradeValue);
+            // participant/-/$lastname/$firstname/$id
+            Key partKey = Key.createKey(Arrays.asList("participant"),
+                    Arrays.asList(participantResultSet.getString(3), participantResultSet.getString(2), participantResultSet.getString(1)));
+            Value partValue = Value.createValue(new byte[0]);
+            store.put(partKey, partValue);
+
+            System.out.println(partKey.toString());
         }
 
         ResultSet reviewResultSet = jdbcStatement.executeQuery("SELECT programID, participantID, rating FROM Review");
