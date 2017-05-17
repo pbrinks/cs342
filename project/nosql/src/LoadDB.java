@@ -11,16 +11,29 @@ import java.util.Arrays;
 /**
  * LoadDB loads data from the sadb SQL relational database and converts it into the KVLite store
  *
- * Usefulness of queries and how appropriateness of noSQL is described in their respective classes
+ * Usefulness of queries and appropriateness of noSQL is described in their respective classes
  *
  * A key-value noSQL system is not the best for joins. It worked alright for my getProgramParticipants, because I set up my
  *  keys so that I could iterate through all review/movieIDs with the correct id and get all participants in that program
  *  however, if I wanted to get the program a participant was in, I would not be able to; there is only a one way relationship.
- *  Also, there is not a great way to sort using KVLite's key-value system, and therefore I had to make another Participant class
- *  in order to store all participants in an ArrayList and then sort the ArrayList.
+ *  Also, there is not really a way to sort using that key/value structure, so I had to make a new key/value structure to sort, even though it
+ *  essentially the same information.
+ *
+ * Keys/Value structures:
+ *      program/$id/-/dept : $dept
+ *      program/$id/-/coursenum : $coursenum
+ *      program/$id/-/country : $country
+ *
+ *      participant/$id/-/firstname : $firstname    - used for GetProgramParticipants
+ *      participant/$id/-/lastname : $lastname      - used for GetProgramParticipants
+ *
+ *      participant/-/$lastname/$firstname/$id : NO_VALUE    - used to sort all participants by lastName, firstName (in GetSortedParticipants)
+ *
+ *      review/$programID/$participantID/-/rating : $rating  - used to get all participants in a certain Program (in GetProgramParticipants)
+ *
  *
  * @author Paige Brinks, plb7
- * @version 5/12/2017
+ * @version May 2017
  */
 public class LoadDB {
 
@@ -30,7 +43,7 @@ public class LoadDB {
                 "jdbc:oracle:thin:@localhost:1521:xe", "sadb", "bjarne");
         Statement jdbcStatement = jdbcConnection.createStatement();
 
-        // read in program
+        // read in Programs
         ResultSet programResultSet = jdbcStatement.executeQuery("SELECT id, dept, courseNumber, country FROM Program");
         while (programResultSet.next()) {
             // program/id/-/dept
@@ -47,17 +60,26 @@ public class LoadDB {
             store.put(countryKey, countryValue);
         }
 
+        // read in Participants
         ResultSet participantResultSet = jdbcStatement.executeQuery("SELECT id, firstname, lastname FROM Participant");
         while (participantResultSet.next()) {
-            // participant/-/$lastname/$firstname/$id
+            // participant/$id/-/firstname : $firstname     - used for GetProgramPartcipants
+            Key fnameKey = Key.createKey(Arrays.asList("participant", participantResultSet.getString(1)), Arrays.asList("firstname"));
+            Value fnameValue = Value.createValue(participantResultSet.getString(2).getBytes());
+            store.put(fnameKey, fnameValue);
+            // participant/$id/-/lastname : $lastname   - used for GetProgramPartcipants
+            Key lnameKey = Key.createKey(Arrays.asList("participant", participantResultSet.getString(1)), Arrays.asList("lastname"));
+            Value lnameValue = Value.createValue(participantResultSet.getString(3).getBytes());
+            store.put(lnameKey, lnameValue);
+
+            // participant/-/$lastname/$firstname/$id : NO_VALUE  - used for sorting
             Key partKey = Key.createKey(Arrays.asList("participant"),
                     Arrays.asList(participantResultSet.getString(3), participantResultSet.getString(2), participantResultSet.getString(1)));
             Value partValue = Value.createValue(new byte[0]);
             store.put(partKey, partValue);
-
-            System.out.println(partKey.toString());
         }
 
+        // read in Reviews
         ResultSet reviewResultSet = jdbcStatement.executeQuery("SELECT programID, participantID, rating FROM Review");
         while (reviewResultSet.next()) {
             // review/programID/participantID/-/rating
@@ -67,9 +89,12 @@ public class LoadDB {
                 Value ratingValue = Value.createValue(reviewResultSet.getString(3).getBytes());
                 store.put(ratingKey, ratingValue);
             } else {
-                Value ratingValue = Value.createValue("null".getBytes());
+                Value ratingValue = Value.createValue(new byte[0]);
                 store.put(ratingKey, ratingValue);
             }
+
+            String result = new String(store.get(ratingKey).getValue().getValue());
+            System.out.println(ratingKey.toString() + " : " + result);
         }
 
         reviewResultSet.close();
