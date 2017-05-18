@@ -21,6 +21,7 @@ import java.util.List;
  * about a certain program (GET).
  *
  * @author kvlinden
+ * @auther Paige Brinks
  * @version Spring, 2017
  */
 @Stateless
@@ -38,8 +39,8 @@ public class SADBResource {
      * GET an individual Program record.
      * useful for registrar/off-campus programs to look up info on a specific program
      *
-     * @param id the ID of the Program to retrieve
-     * @return an individual Program record
+     * @param id, the ID of the Program to retrieve
+     * @return Program record with inputter ID
      */
     @GET
     @Path("/program/{id}")
@@ -52,6 +53,7 @@ public class SADBResource {
     /**
      * GET all Programs using the criteria query API.
      * This would be useful to off-campus programs to be able to look up all current abroad programs
+     *
      * @return a list of all Program records
      */
     @GET
@@ -65,6 +67,10 @@ public class SADBResource {
     * PUT updates a specific Program record
     * this is useful for the registrar/off-campus programs/the programs professor, in case
     * there has been a change to a specific program, they can update it
+    *
+    * @param uProgram, the Program with updated values
+    * @param id, the ID of the Program to update
+    * @return the updated Program
     */
     @PUT
     @Path("/program/{id}")
@@ -84,6 +90,9 @@ public class SADBResource {
     /**
     * POST creates a new Program record
     * this is useful for the registrar to add a new program, if a professor decides to lead a new one
+    *
+    * @param newProgram, Program to insert into the database
+    * @return the new created Program
     */
     @POST
     @Path("/programs")
@@ -101,6 +110,9 @@ public class SADBResource {
     * DELETE deletes a specific Program record
     * this is useful for the registrar/off-campus programs to remove a program, in the case it is no longer offered
     * (for example, if not enough students registered and the program is cancelled)
+    * 
+    * @param id, the ID of the Program to delete
+    * @return String confirming deletion of Program with given ID
     */
     @DELETE
     @Path("/program/{id}")
