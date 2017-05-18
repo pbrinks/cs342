@@ -40,7 +40,7 @@ public class SADBResource {
      * useful for registrar/off-campus programs to look up info on a specific program
      *
      * @param id, the ID of the Program to retrieve
-     * @return Program record with inputter ID
+     * @return Program record with inputted ID
      */
     @GET
     @Path("/program/{id}")
