@@ -26,3 +26,4 @@ Updates based on comments from Project 5 deliverable (Extensions):
 -	Updated my GetSortedParticipants to use a multi-get to sort, instead of manually sorting each record
 -	Added documentation of my key structure at the beginning of my LoadDB.java file
 -	Removed my lib/ directory from GitHub
+- Updated documentation in SADBResource
