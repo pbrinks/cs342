@@ -14,37 +14,37 @@ create table Department (
 
 create table Professor (
 	id integer PRIMARY KEY,
-	firstName varchar(20),
-	lastName varchar(20),
+	firstName varchar(20) NOT NULL,
+	lastName varchar(20) NOT NULL,
 	dept varchar(4),
 	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL
 	);
 		
 create table Program (
 	id integer PRIMARY KEY,
-	dept varchar(4),
-	courseNumber integer,
+	dept varchar(4) NOT NULL,
+	courseNumber integer NOT NULL,
 	professorID integer,
-	semester char(1),
-	country varchar(50),
+	semester char(1) NOT NULL,
+	country varchar(50) NOT NULL,
 	city varchar(50),
 	cost float,
 	description varchar(200),
 	capacity integer,
-	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE SET NULL,
+	FOREIGN KEY (dept) REFERENCES Department(code) ON DELETE CASCADE,
 	FOREIGN KEY (professorID) REFERENCES Professor(id) ON DELETE SET NULL,
 	FOREIGN KEY (semester) REFERENCES SemesterCode(semester) ON DELETE CASCADE
 	);
 		
 create table Participant (
 	id integer PRIMARY KEY,
-	firstName varchar(20),
-	lastName varchar(20),
-	birthDate date,
+	firstName varchar(20) NOT NULL,
+	lastName varchar(20) NOT NULL,
+	birthDate date NOT NULL,
 	major varchar(4),
-	grade varchar(9), 
+	grade varchar(9) NOT NULL, 
 	FOREIGN KEY (major) REFERENCES Department(code) ON DELETE SET NULL,
-	FOREIGN KEY (grade) REFERENCES GradeLevel(grade) ON DELETE SET NULL
+	FOREIGN KEY (grade) REFERENCES GradeLevel(grade) ON DELETE CASCADE
 	);
 	
 create table Review (

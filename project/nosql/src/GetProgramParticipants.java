@@ -15,6 +15,9 @@ import java.util.Iterator;
  *
  *  noSQL is appropriate for this query because the Iterator makes it very easy to iterate through each record with a major
  *  key beginning with review/programID and find the Participants of that program
+ *
+ * @author Paige Brinks, plb7
+ * @version May 2017
  */
 public class GetProgramParticipants {
     public static void main(String[] args) throws SQLException {
